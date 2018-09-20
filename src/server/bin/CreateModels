@@ -17,7 +17,7 @@
 // newProductTwo.save();
 
 // const newProductThree = Shop({
-//   name: "Organo",
+//   name: "Oregano",
 //   price: 30,
 //   stock: true,
 //  image: "url('oregano.e9a963d2.png')",       

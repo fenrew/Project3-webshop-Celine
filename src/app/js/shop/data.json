@@ -1,3 +1,5 @@
+//Not currently in use!
+
 {
   "data": [
     {"category": "Eteriske Oljer",  "price": "50 kr",    "stocked": true,    "name": "Vill Appelsin", "image": "url('wild-orange.1bdbdb4c.png')",   "info": "Vill Appelsin er full av antioksidanter og kan virke oppløftende emosjonelt og fysisk i kroppen. Den kan også dempe engstelige følelser samt dempe høy puls ved å støtte hjertet."},

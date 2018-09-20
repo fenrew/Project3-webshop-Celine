@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Shop = require("../../models/Shop");
+const User = require("../../models/User")
 
 const authRoutes = require("./auth");
 const { userMiddleware, checkLoggedIn } = require("../../utils/middleware");
@@ -12,6 +13,19 @@ router.get("/", (req, res) => {
 });
 
 router.get("/models", (req, res) => {
+})
+
+router.get("/shop/user", (req, res) => {
+  User.findById(req.user._id).then((result) => {
+    res.send({result})
+  })
+})
+
+router.post("/shop/cart", (req, res) => {
+  const user = req.body.user;
+  User.findByIdAndUpdate(user._id, {shoppingCart: user.shoppingCart}, {new:true}).then((result) => {
+    result.save();
+  })
 })
 
 router.get("/check-out", (req, res) => {

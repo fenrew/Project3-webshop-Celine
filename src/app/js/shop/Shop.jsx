@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import productsJson from "./data.json";
 import OilsMain from "./OilsMain";
 import OilsNavigation from "./OilsNavigation";
 import CheckoutShop from "./CheckoutShop";
@@ -12,7 +11,7 @@ class App extends Component {
     this.state = {
       ethericOils: [],
       search: "",
-      checkout: ["Oregano", "Oregano"],
+      checkout: [],
       products: ""
     };
 
@@ -26,10 +25,14 @@ class App extends Component {
         products: products.result
       });
     });
+    api.get("/api/shop/user").then(user => {
+      this.setState({
+        checkout: user.result.shoppingCart
+      });
+    });
   }
 
   render() {
-    
     if (!this.state.products) {
       return (
         <div>
@@ -45,6 +48,7 @@ class App extends Component {
 
     const mappedOilProducts = newMappedProducts.map((el, index) => (
       <OilsMain
+        object={el}
         name={el.name}
         price={el.price}
         stocked={el.stocked}
@@ -54,8 +58,10 @@ class App extends Component {
         key={index}
       />
     ));
-    const mappedOilNavigation = newMappedProducts.map((el, index) => (
+
+    const mappedOilNavigation = this.state.products.map((el, index) => (
       <OilsNavigation
+        object={el}
         name={el.name}
         price={el.price}
         stocked={el.stocked}
@@ -65,23 +71,21 @@ class App extends Component {
     ));
 
     const mappedCheckout = this.state.checkout.map((el, index) => (
-      <CheckoutShop checkout={el} key={index} />
+      <CheckoutShop name={el.name} image={el.image} price={el.price} key={index} />
     ));
 
     return (
-      <div>
+      <div id="the-whole-shop-container">
         <div className="navigation-fix" />
-        <div className="shop-flexbox-container">
           {/* <div className="shop-background-overlay"> */}
 
           {/* NAVIGATION TABLE */}
           <div className="shop-navigation">
             <h3 className="quick-buy">Hurting Kjøp</h3>
-            <table>
-              <tbody>{mappedOilNavigation}</tbody>
-            </table>
+            <div className="mapped-navigation-contents">{mappedOilNavigation}</div>
           </div>
 
+        <div className="shop-flexbox-container">
           {/* SEARCH */}
           <div className="search-and-shop-container">
             <div className="search">
@@ -101,10 +105,10 @@ class App extends Component {
           </div>
 
           {/* CHECKOUT SHOP */}
-          <div>
+          <div className="checkout-container">
             <div>{mappedCheckout}</div>
             <br />
-            <button>Betal!</button>
+            <button className="to-checkout-button">Betal!</button>
             <br />
             <br />
             <button
@@ -127,12 +131,18 @@ class App extends Component {
     });
   }
 
-  _addToCart(name) {
-    console.log(name);
-    let newArray = this.state.checkout;
-    newArray.push(name);
-    this.setState({
-      checkout: newArray
+  _addToCart(object) {
+    let newArray;
+    api.get("/api/shop/user").then(user => {
+      newArray = this.state.checkout;
+      newArray.push(object);
+      this.setState({
+        checkout: newArray
+      });
+      if (!user) return;
+      user.result.shoppingCart.push(newArray[newArray.length - 1]);
+      user = user.result;
+      return api.post("/api/shop/cart", { user });
     });
   }
 
