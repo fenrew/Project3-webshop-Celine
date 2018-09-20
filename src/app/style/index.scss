@@ -1,0 +1,13 @@
+$primary-color: #63adf2;
+$secondary-color: #ff686b;
+$text-color: #333;
+$grey: rgb(200, 200, 200);
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@import "./carousel.scss";
+@import "./shop.scss";
+@import "./navigation.scss";
