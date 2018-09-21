@@ -3,6 +3,7 @@ import OilsMain from "./OilsMain";
 import OilsNavigation from "./OilsNavigation";
 import CheckoutShop from "./CheckoutShop";
 import api from "../utils/api";
+import { Redirect } from "react-router"
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class App extends Component {
       ethericOils: [],
       search: "",
       checkout: [],
-      products: ""
+      products: "",
+      redirect: false,
     };
 
     this._handleQuery = this._handleQuery.bind(this);
@@ -41,6 +43,10 @@ class App extends Component {
           <h1>Loading...</h1>
         </div>
       );
+    }
+
+    if (this.state.redirect) {
+      return <Redirect push to="/shop/checkout" />
     }
 
     const newMappedProducts = this.state.products.filter(el =>
@@ -127,7 +133,7 @@ class App extends Component {
             </button>
             <div>{mappedCheckout}</div>
             <br />
-            <button className="to-checkout-button">Betal!</button>
+            <button className="to-checkout-button" onClick={this._handleRedirectCart}>Betal!</button>
             <br />
             <br />
           </div>
@@ -135,6 +141,12 @@ class App extends Component {
       </div>
       // </div>
     );
+  }
+
+  _handleRedirectCart = () => {
+    this.setState({
+      redirect: true
+    })
   }
 
   _handleQuery(event) {
