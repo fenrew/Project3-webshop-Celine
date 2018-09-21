@@ -17,6 +17,7 @@ class App extends Component {
 
     this._handleQuery = this._handleQuery.bind(this);
     this._addToCart = this._addToCart.bind(this);
+    this._removeProduct = this._removeProduct.bind(this);
   }
 
   componentDidMount() {
@@ -71,19 +72,30 @@ class App extends Component {
     ));
 
     const mappedCheckout = this.state.checkout.map((el, index) => (
-      <CheckoutShop name={el.name} image={el.image} price={el.price} key={index} />
+      <CheckoutShop
+        name={el.name}
+        image={el.image}
+        price={el.price}
+        quantity={el.quantity}
+        addToCart={this._addToCart}
+        object={el}
+        removeProduct={this._removeProduct}
+        key={index}
+      />
     ));
 
     return (
       <div id="the-whole-shop-container">
         <div className="navigation-fix" />
-          {/* <div className="shop-background-overlay"> */}
+        {/* <div className="shop-background-overlay"> */}
 
-          {/* NAVIGATION TABLE */}
-          <div className="shop-navigation">
-            <h3 className="quick-buy">Hurting Kjøp</h3>
-            <div className="mapped-navigation-contents">{mappedOilNavigation}</div>
+        {/* NAVIGATION TABLE */}
+        <div className="shop-navigation">
+          <h3 className="quick-buy">Hurting Kjøp</h3>
+          <div className="mapped-navigation-contents">
+            {mappedOilNavigation}
           </div>
+        </div>
 
         <div className="shop-flexbox-container">
           {/* SEARCH */}
@@ -106,11 +118,6 @@ class App extends Component {
 
           {/* CHECKOUT SHOP */}
           <div className="checkout-container">
-            <div>{mappedCheckout}</div>
-            <br />
-            <button className="to-checkout-button">Betal!</button>
-            <br />
-            <br />
             <button
               onClick={() => {
                 this._clearCart();
@@ -118,6 +125,11 @@ class App extends Component {
             >
               Clear
             </button>
+            <div>{mappedCheckout}</div>
+            <br />
+            <button className="to-checkout-button">Betal!</button>
+            <br />
+            <br />
           </div>
         </div>
       </div>
@@ -131,16 +143,23 @@ class App extends Component {
     });
   }
 
-  _addToCart(object) {
+  _addToCart(product) {
     let newArray;
+    let duplicate = false;
+    newArray = this.state.checkout;
+    newArray.map(el => {
+      if (el._id === product._id) {
+        duplicate = true;
+        return (el.quantity += 1);
+      } else return el;
+    });
+    if (duplicate === false) newArray.push(product);
+    this.setState({
+      checkout: newArray
+    });
     api.get("/api/shop/user").then(user => {
-      newArray = this.state.checkout;
-      newArray.push(object);
-      this.setState({
-        checkout: newArray
-      });
       if (!user) return;
-      user.result.shoppingCart.push(newArray[newArray.length - 1]);
+      user.result.shoppingCart = newArray;
       user = user.result;
       return api.post("/api/shop/cart", { user });
     });
@@ -149,6 +168,33 @@ class App extends Component {
   _clearCart() {
     this.setState({
       checkout: []
+    });
+    api.get("/api/shop/user").then(user => {
+      user.result.shoppingCart = this.state.checkout;
+      user = user.result;
+      return api.post("/api/shop/cart", { user });
+    });
+  }
+
+  _removeProduct(product) {
+    let newArray = this.state.checkout;
+    newArray.map(el => {
+      if (el._id === product._id) {
+        el.quantity -= 1;
+        if (el.quantity === 0) {
+          let index = newArray.indexOf(el);
+          newArray.splice(index, 1);
+        } else return el;
+      } else return el;
+    });
+    this.setState({
+      checkout: newArray
+    });
+    api.get("/api/shop/user").then(user => {
+      if (!user) return;
+      user.result.shoppingCart = newArray;
+      user = user.result;
+      return api.post("/api/shop/cart", { user });
     });
   }
 }

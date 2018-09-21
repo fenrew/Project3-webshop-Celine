@@ -18,6 +18,7 @@ class Application extends React.Component {
 
         this.state = {
             user: this._setUser(true),
+            login: "Logg på"
         }
 
         this._setUser = this._setUser.bind(this)
@@ -32,7 +33,7 @@ class Application extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Navigation user={this.state.user} />
+                    <Navigation user={this.state.user} login={this.state.login} />
                     <Switch>
                         <Route exact path="/" render={() => <Frontpage user={this.state.user} />} />
                         <Route exact path="/shop" render={() => <Shop user={this.state.user} />} />
@@ -52,6 +53,7 @@ class Application extends React.Component {
     _resetUser() {
         this.setState({
             user: null,
+            login: "Logg på"
         })
     }
 
@@ -61,7 +63,7 @@ class Application extends React.Component {
             const decoded = jwtDecode(token)
             delete decoded.iat
             if (init) return decoded
-            this.setState({ user: decoded })
+            this.setState({ user: decoded, login: "Logg av" })
         } else {
             return null
         }

@@ -8,6 +8,10 @@ const userSchema = new Schema ({
         required: true,
     },
     stock: Boolean,
+    quantity: {
+        type: Number,
+        default: 1,
+    },
     image: String,
     info: String
 })
