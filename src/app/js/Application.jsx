@@ -31,6 +31,7 @@ class Application extends React.Component {
 
     render() {
         return (
+            
             <BrowserRouter>
                 <div>
                     <Navigation user={this.state.user} login={this.state.login} />
@@ -47,6 +48,7 @@ class Application extends React.Component {
                     </Switch>
                 </div>
             </BrowserRouter>
+        
         )
     }
 

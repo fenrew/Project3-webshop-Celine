@@ -4,6 +4,7 @@ const Shop = require("../../models/Shop");
 const User = require("../../models/User")
 
 const authRoutes = require("./auth");
+const checkoutRoutes = require("./checkout");
 const { userMiddleware, checkLoggedIn } = require("../../utils/middleware");
 
 router.use(userMiddleware);
@@ -46,6 +47,7 @@ router.get("/protected", checkLoggedIn, (req, res) => {
 });
 
 router.use("/auth", authRoutes);
+router.use("/checkout", checkoutRoutes);
 
 router.use((req, res) => {
   res.status(404).send({ error: "not-found" });
