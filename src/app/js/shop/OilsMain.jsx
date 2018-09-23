@@ -6,7 +6,7 @@ const OilsMain = props => {
     //     color: "red"
     // }
     let imageStyle = {
-      backgroundImage: props.image
+      backgroundImage: "url('"+props.image+"')"
     }
   return (
   <div className="product-card">
