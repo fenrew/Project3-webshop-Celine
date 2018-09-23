@@ -2,7 +2,7 @@ import React from "react";
 
 const CheckoutShop = props => {
   let imageStyle = {
-    backgroundImage: props.image
+    backgroundImage: "url('"+props.image+"')"
   };
   return (
     <div className="each-checkout-element">

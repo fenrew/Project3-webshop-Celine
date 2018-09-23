@@ -58,14 +58,14 @@ class Carousel extends Component {
       {
         headerText: this.state.headerTextOne,
         paragraphText: this.state.paragraphTextOne,
-        image: "url('CelineHomepagePhoto2.4da96596.png')",
+        image: "url('https://res.cloudinary.com/doecwsnly/image/upload/v1537711707/CelineHomepagePhoto2.png')",
         widthStyle: widthStyleFirst,
         colorStyle: colorStyleFirst
       },
       {
         headerText: this.state.headerTextTwo,
         paragraphText: this.state.paragraphTextTwo,
-        image: "url('oils-background-image.45e1b2d7.png')",
+        image: "url('https://res.cloudinary.com/doecwsnly/image/upload/v1537711838/oils-background-image.png')",
         widthStyle: widthStyleSecond,
         colorStyle: colorStyleSecond
       }
