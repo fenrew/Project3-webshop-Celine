@@ -9,14 +9,15 @@ class SignIn extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <h1>SignIn</h1>
+            <div className="signin-container">
+            <div className="small-signin-container">
+                <h1 className="header-signin">Innlogging</h1>
                 <input
                     type="email"
                     value={this.props.email}
                     onChange={evt => this.props.handleInputChange('email', evt.target.value)}
                     className="input"
-                    placeholder="E-Mail"
+                    placeholder="E-Post"
                 />
                 <br />
                 <br />
@@ -25,20 +26,23 @@ class SignIn extends React.Component {
                     value={this.props.password}
                     onChange={evt => this.props.handleInputChange('password', evt.target.value)}
                     className="input"
-                    placeholder="Password"
+                    placeholder="Passord"
                 />
                 <br />
                 <br />
-                <button className="button" onClick={() => this.props.sign('in')}>
-                    Sign In
+                <button className="button-signin" onClick={() => this.props.sign('in')}>
+                    Logg på
                 </button>
                 <br />
                 <br />
                 <p>{this.props.error}</p>
                 <div className="separator" />
+                <div className="signin-link">
                 <Link className="link" to="/auth/sign-up">
-                    Don't have an account yet? Sign up instead!
+                    Har du ingen bruker? Registrer deg nå!
                 </Link>
+                </div>
+            </div>
             </div>
         )
     }

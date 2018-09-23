@@ -1,0 +1,54 @@
+.stripe-payment-window {
+  width: 47.5vw;
+  margin: 0;
+  background-color: white;
+  border: 3px solid rgb(221, 195, 195);
+  height: 1.6vw;
+  padding: 0.5vw;
+}
+
+.stripe-checkout-card-info {
+  font-size: 1.5vw;
+  line-height: 2vw;
+  font-family: "Maitree", sans-serif;
+}
+
+.stripe-pay-button {
+  margin: 2vw 0 0 0;
+  width: 100%;
+  font-family: "Maitree", sans-serif;
+  line-height: 0;
+  height: 3vw;
+  font-size: 2vw;
+  font-weight: bold;
+  background-color: rgb(216, 62, 62);
+  border: 2px solid rgb(235, 160, 160);
+  color: white;
+}
+
+// .checkout-cart-container {
+//   position: absolute;
+//   background-color: rgb(110, 110, 110);
+//   color: white;
+//   width: 25%;
+//   min-height: 94%;
+//   text-align: center;
+// }
+
+// .checkout-cart-name-header {
+//   font-size: 1.5vw;
+// }
+
+// .checkout-cart-price {
+//   font-size: 1.5vw;
+// }
+
+// .checkout-cart-total {
+//   margin: 0.5vw;
+// }
+
+// .checkout-cart-total-price {
+//   font-size: 1.5vw;
+//   font-weight: bold;
+// }
+

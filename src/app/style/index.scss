@@ -8,6 +8,17 @@ body {
   padding: 0;
 }
 
+#not-found {
+  text-align: center;
+  padding-top: 20vh;
+  font-size: 15vh;
+  width: 70%;
+  margin: 0 auto;
+}
+
 @import "./carousel.scss";
 @import "./shop.scss";
 @import "./navigation.scss";
+@import "./auth.scss";
+@import "./checkout.scss";
+@import "./aboutMe.scss"

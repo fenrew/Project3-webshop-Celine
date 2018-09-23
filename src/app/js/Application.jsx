@@ -11,6 +11,7 @@ import api from './utils/api'
 import Frontpage from "./frontpage/frontpage"
 import Shop from "./shop/Shop"
 import Checkout from "./shop/Checkout"
+import AboutMe from "./about/aboutMe"
 
 class Application extends React.Component {
     constructor(props) {
@@ -40,6 +41,7 @@ class Application extends React.Component {
                         <Route exact path="/shop" render={() => <Shop user={this.state.user} />} />
                         <Route exact path="/profile" render={() => <Profile user={this.state.user} />} />
                         <Route exact path="/shop/checkout" render={() => <Checkout user={this.state.user} />} />
+                        <Route exact path="/about-me" render={() => <AboutMe user={this.state.user} />} />
                         <Route
                             path="/auth"
                             render={() => <Auth setUser={this._setUser} resetUser={this._resetUser} />}

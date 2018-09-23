@@ -9,14 +9,15 @@ class SignUp extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <h1>SignUp</h1>
+            <div className="signin-container">
+            <div className="small-signup-container">
+                <h1 className="header-signin">Registrer deg</h1>
                 <input
                     type="email"
                     value={this.props.email}
                     onChange={evt => this.props.handleInputChange('email', evt.target.value)}
                     className="input"
-                    placeholder="E-Mail"
+                    placeholder="E-Post"
                 />
                 <br />
                 <br />
@@ -25,7 +26,7 @@ class SignUp extends React.Component {
                     value={this.props.password}
                     onChange={evt => this.props.handleInputChange('password', evt.target.value)}
                     className="input"
-                    placeholder="Password"
+                    placeholder="Passord"
                 />
                 <br />
                 <br />
@@ -34,20 +35,23 @@ class SignUp extends React.Component {
                     value={this.props.picture}
                     onChange={evt => this.props.handleInputChange('picture', evt.target.files[0])}
                     className="input"
-                    placeholder="Profile Picture"
+                    placeholder="Profil bilde"
                 />
                 <br />
                 <br />
-                <button className="button" onClick={() => this.props.sign('up')}>
-                    Sign Up
+                <button className="button-signin" onClick={() => this.props.sign('up')}>
+                    Registrer
                 </button>
                 <br />
                 <br />
                 <p>{this.props.error}</p>
                 <div className="separator" />
-                <Link className="link" to="/auth/sign-in">
-                    Do you have an account already? Sign in instead!
-                </Link>
+                <div className="signin-link">
+                    <Link className="link" to="/auth/sign-in">
+                        Har du en bruker allerede? Logg inn!
+                    </Link>
+                </div>
+            </div>
             </div>
         )
     }

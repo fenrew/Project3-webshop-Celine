@@ -3,7 +3,8 @@ import OilsMain from "./OilsMain";
 import OilsNavigation from "./OilsNavigation";
 import CheckoutShop from "./CheckoutShop";
 import api from "../utils/api";
-import { Redirect } from "react-router"
+import { Redirect } from "react-router";
+import CheckoutPage from "./Checkout"
 
 class App extends Component {
   constructor(props) {
@@ -13,13 +14,22 @@ class App extends Component {
       ethericOils: [],
       search: "",
       checkout: [],
+      toCheckout: false,
       products: "",
       redirect: false,
+      totalPrice: 0,
+      widthQuickBuy: "0%",
+      colorQuickBuy: "transparent",
+      fontsizeQuickBuyHeader: "0",
+      fontsizeQuickBuyElement: "0",
     };
+
+    this.checkoutWidth = 100;
 
     this._handleQuery = this._handleQuery.bind(this);
     this._addToCart = this._addToCart.bind(this);
     this._removeProduct = this._removeProduct.bind(this);
+    this._openQuickBuy = this._openQuickBuy.bind(this);
   }
 
   componentDidMount() {
@@ -29,8 +39,13 @@ class App extends Component {
       });
     });
     api.get("/api/shop/user").then(user => {
+      let newTotalPrice = 0;
+      user.result.shoppingCart.map(
+        el => (newTotalPrice += el.price * el.quantity)
+      );
       this.setState({
-        checkout: user.result.shoppingCart
+        checkout: user.result.shoppingCart,
+        totalPrice: newTotalPrice
       });
     });
   }
@@ -46,36 +61,29 @@ class App extends Component {
     }
 
     if (this.state.redirect) {
-      return <Redirect push to="/shop/checkout" />
+      return <Redirect push to="/shop/checkout" />;
     }
 
     const newMappedProducts = this.state.products.filter(el =>
       el.name.toLowerCase().includes(this.state.search)
     );
-
-    const mappedOilProducts = newMappedProducts.map((el, index) => (
-      <OilsMain
-        object={el}
-        name={el.name}
-        price={el.price}
-        stocked={el.stocked}
-        info={el.info}
-        image={el.image}
-        addToCart={this._addToCart}
-        key={index}
-      />
-    ));
-
-    const mappedOilNavigation = this.state.products.map((el, index) => (
-      <OilsNavigation
-        object={el}
-        name={el.name}
-        price={el.price}
-        stocked={el.stocked}
-        addToCart={this._addToCart}
-        key={index}
-      />
-    ));
+    let mappedOilProducts;
+    if (!this.state.toCheckout) {
+      mappedOilProducts = newMappedProducts.map((el, index) => (
+        <OilsMain
+          object={el}
+          name={el.name}
+          price={el.price}
+          stocked={el.stocked}
+          info={el.info}
+          image={el.image}
+          addToCart={this._addToCart}
+          key={index}
+        />
+      ));
+    } else {
+      mappedOilProducts = <CheckoutPage />
+    }
 
     const mappedCheckout = this.state.checkout.map((el, index) => (
       <CheckoutShop
@@ -86,22 +94,67 @@ class App extends Component {
         addToCart={this._addToCart}
         object={el}
         removeProduct={this._removeProduct}
+        totalPrice={this.state.totalPrice}
         key={index}
       />
     ));
 
+    if (this.state.checkout.length === 0) this.checkoutWidth = { width: "0%" };
+    else {
+      this.checkoutWidth = { width: "18%" };
+    }
+
+    let quickBuyStyle = {
+      width: this.state.widthQuickBuy
+    };
+    let quickBuyStyleHeader = {
+      color: this.state.colorQuickBuy,
+      fontSize: this.state.fontsizeQuickBuyHeader
+    };
+    let quickBuyStyleElement = {
+      fontSize: this.state.fontsizeQuickBuyElement
+    }
+    let quickBuyStyleButton = {
+      left: this.state.widthQuickBuy
+    }
+
+    let mappedOilNavigation;
+
+    if (this.state.colorQuickBuy === "black") {
+      mappedOilNavigation = this.state.products.map((el, index) => (
+        <OilsNavigation
+          object={el}
+          name={el.name}
+          price={el.price}
+          stocked={el.stocked}
+          addToCart={this._addToCart}
+          key={index}
+        />
+      ));
+    }
+
     return (
       <div id="the-whole-shop-container">
         <div className="navigation-fix" />
-        {/* <div className="shop-background-overlay"> */}
 
         {/* NAVIGATION TABLE */}
-        <div className="shop-navigation">
-          <h3 className="quick-buy">Hurting Kjøp</h3>
-          <div className="mapped-navigation-contents">
+        <div className="shop-navigation" style={quickBuyStyle}>
+          <h3 className="quick-buy" style={quickBuyStyleHeader}>
+            Hurting Kjøp
+          </h3>
+          <div className="mapped-navigation-contents" style={quickBuyStyleElement}>
             {mappedOilNavigation}
           </div>
         </div>
+        <button
+          className="quick-buy-button"
+          style={quickBuyStyleButton}
+          onClick={() => {
+            this._openQuickBuy();
+          }}
+        >
+          Hurtig Kjøp
+        </button>
 
         <div className="shop-flexbox-container">
           {/* SEARCH */}
@@ -123,8 +176,9 @@ class App extends Component {
           </div>
 
           {/* CHECKOUT SHOP */}
-          <div className="checkout-container">
+          <div className="checkout-container" style={this.checkoutWidth}>
             <button
+              className="clear-checkout-button"
               onClick={() => {
                 this._clearCart();
               }}
@@ -133,21 +187,30 @@ class App extends Component {
             </button>
             <div>{mappedCheckout}</div>
             <br />
-            <button className="to-checkout-button" onClick={this._handleRedirectCart}>Betal!</button>
+            <div className="total-price-checkout">
+              Total Pris: {this.state.totalPrice}
+              ,-
+            </div>
+            <button
+              className="to-checkout-button"
+              onClick={this._handleRedirectCart}
+            >
+              Gå til kassen
+            </button>
             <br />
             <br />
           </div>
         </div>
       </div>
-      // </div>
     );
   }
 
   _handleRedirectCart = () => {
     this.setState({
-      redirect: true
-    })
-  }
+      toCheckout: true,
+      // redirect: true
+    });
+  };
 
   _handleQuery(event) {
     this.setState({
@@ -155,9 +218,28 @@ class App extends Component {
     });
   }
 
+  _openQuickBuy() {
+    if (this.state.colorQuickBuy === "black") {
+      return this.setState({
+        colorQuickBuy: "transparent",
+        widthQuickBuy: "0%",
+        fontsizeQuickBuyHeader: "0",
+        fontsizeQuickBuyElement: "0",
+      });
+    } else {
+      return this.setState({
+        colorQuickBuy: "black",
+        widthQuickBuy: "15%",
+        fontsizeQuickBuyHeader: "2vw",
+        fontsizeQuickBuyElement: "1.6vw"
+      });
+    }
+  }
+
   _addToCart(product) {
     let newArray;
     let duplicate = false;
+    let newTotalPrice = this.state.totalPrice + product.price;
     newArray = this.state.checkout;
     newArray.map(el => {
       if (el._id === product._id) {
@@ -165,9 +247,13 @@ class App extends Component {
         return (el.quantity += 1);
       } else return el;
     });
-    if (duplicate === false) newArray.push(product);
+    if (duplicate === false) {
+      product.quantity += 1;
+      newArray.push(product);
+    }
     this.setState({
-      checkout: newArray
+      checkout: newArray,
+      totalPrice: newTotalPrice
     });
     api.get("/api/shop/user").then(user => {
       if (!user) return;
@@ -179,7 +265,8 @@ class App extends Component {
 
   _clearCart() {
     this.setState({
-      checkout: []
+      checkout: [],
+      totalPrice: 0
     });
     api.get("/api/shop/user").then(user => {
       user.result.shoppingCart = this.state.checkout;
@@ -190,9 +277,12 @@ class App extends Component {
 
   _removeProduct(product) {
     let newArray = this.state.checkout;
+    let newTotalPrice = this.state.totalPrice - product.price;
     newArray.map(el => {
       if (el._id === product._id) {
-        el.quantity -= 1;
+        if (el.quantity > 0) {
+          el.quantity -= 1;
+        }
         if (el.quantity === 0) {
           let index = newArray.indexOf(el);
           newArray.splice(index, 1);
@@ -200,7 +290,8 @@ class App extends Component {
       } else return el;
     });
     this.setState({
-      checkout: newArray
+      checkout: newArray,
+      totalPrice: newTotalPrice
     });
     api.get("/api/shop/user").then(user => {
       if (!user) return;

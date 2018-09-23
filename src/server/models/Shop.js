@@ -10,7 +10,7 @@ const userSchema = new Schema ({
     stock: Boolean,
     quantity: {
         type: Number,
-        default: 1,
+        default: 0,
     },
     image: String,
     info: String

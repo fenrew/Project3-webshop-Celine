@@ -14,7 +14,7 @@ const OilsMain = props => {
     <div className="product-header-text" style={outOfStock}>{props.name}</div>
     <div>{props.info}</div>
     <br/>
-    <div>{props.price} <button className="shopping-button" onClick={() => {props.addToCart(props.object)}}>Kjøp</button></div>
+    <div><b>{props.price},-</b> <button className="shopping-button" onClick={() => {props.addToCart(props.object)}}>Kjøp</button></div>
   </div>
   )
 };

@@ -14,9 +14,9 @@ const CheckoutShop = props => {
           ,-
         </div>
         <div className="checkout-quantity">
-          <button className="checkout-plus-button" onClick={() => {props.addToCart(props.object)}}>+</button>
-          <span>{props.quantity}</span>
           <button className="checkout-minus-button" onClick={() => {props.removeProduct(props.object)}}>-</button>
+          <div className="checkout-quantity-number">{props.quantity}</div>
+          <button className="checkout-plus-button" onClick={() => {props.addToCart(props.object)}}>+</button>
         </div>
       </div>
     </div>

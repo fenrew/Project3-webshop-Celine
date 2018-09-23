@@ -12,14 +12,22 @@ class Checkout extends Component {
     super(props);
 
     this.state = {
-      products: ""
+      products: "",
+      totalPrice: 0,
+      user: ""
     };
   }
 
   componentDidMount() {
     api.get("/api/shop/user").then(user => {
+      let newTotalPrice = 0;
+      user.result.shoppingCart.map(
+        el => (newTotalPrice += el.price * el.quantity)
+      );
       this.setState({
-        products: user.result.shoppingCart
+        products: user.result.shoppingCart,
+        totalPrice: newTotalPrice,
+        user: user
       });
     });
   }
@@ -34,19 +42,39 @@ class Checkout extends Component {
       );
 
     const mappedProducts = this.state.products.map((el, index) => (
-      <Products product={el.name} key={index} />
+      <Products
+        product={el.name}
+        image={el.image}
+        price={el.price}
+        quantity={el.quantity}
+        key={index}
+      />
     ));
 
     return (
       <StripeProvider apiKey="pk_test_Hu2hQvuxdFzg6dJJUBD65JW9">
         <div>
-          <div className="navigation-fix" />
+          {/* <div className="navigation-fix" />
+          <div className="checkout-cart-container">
+          <h1>Handlekurv:</h1>
+          <div className="checkout-mapped-products">
           {mappedProducts}
-          <br />
-          <br />
+          <hr/>
+          </div>
+          <h1 className="checkout-cart-total">Total Pris:</h1>
+          <div className="checkout-cart-total-price">
+          {this.state.totalPrice}
+          ,-
+          </div>
+          </div> */}
+          <div className="StripeElement">
+          <br/>
+          <br/>
+          <br/>
           <Elements>
-            <CheckoutForm />
+            <CheckoutForm user={this.state.user} />
           </Elements>
+          </div>
         </div>
       </StripeProvider>
     );

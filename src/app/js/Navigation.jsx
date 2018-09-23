@@ -12,7 +12,7 @@ const Navigation = props => {
         <Link to="/doterra">doTERRA eteriske</Link>
         <Link to="/kurs-og-foredrag">Kurs & foredrag</Link>
         <Link to="/blog">Blogg</Link>
-        <Link to="/om-meg">Om meg</Link>
+        <Link to="/about-me">Om meg</Link>
         {link}
     </div>
 };
