@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Shop = require("../../models/Shop");
-const User = require("../../models/User")
+const User = require("../../models/User");
+const Purchase = require("../../models/Purchase");
+
 
 const authRoutes = require("./auth");
 const checkoutRoutes = require("./checkout");
@@ -26,6 +28,15 @@ router.post("/shop/cart", (req, res) => {
   const user = req.body.user;
   User.findByIdAndUpdate(user._id, {shoppingCart: user.shoppingCart}, {new:true}).then((result) => {
     result.save();
+  })
+})
+
+router.get("/purchased", checkLoggedIn, (req, res) => {
+  User.findById(req.user._id).then((user) => {
+    if (user.role !== "admin") return
+    return Purchase.find().then((result) => {
+      res.send({result})
+    })
   })
 })
 

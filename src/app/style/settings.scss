@@ -1,0 +1,35 @@
+.each-purchase-container{
+    display: flex;
+    justify-content: center;
+    margin: 3vw auto 0 auto;
+    font-size: 1.7vw;
+    border: 2px solid black;
+    width: 70%;
+    padding: 2vw;
+}
+
+.each-purchase-container h2 {
+    text-decoration: underline;
+    margin: 0 0 1.5vw 0;
+}
+
+.text-box-info {
+    display: flex;
+    line-height: 2.5vw;
+}
+
+.text-box-info-first-box {
+    margin: 0 2vw 0 0;
+}
+
+.each-purchase-information {
+    margin: 0 10vw 0 0;
+}
+
+.each-item {
+    margin: 2vw 0;
+}
+
+table td {
+    padding-right: 1vw;
+}

@@ -1,10 +1,17 @@
 .about-text-container {
-    width: 40%;
+    width: 50vw;
     margin: 0 auto;
     font-size: 1.5vw;
-    padding-top: 10vw;
+    padding-top: 2vw;
 }
 
 .about-text-container span {
     font-weight: bold;
+}
+
+.image-aboutme {
+    width: 50vw;
+    height: 30vw;
+    display: block;
+    margin: 3vw auto 0 auto;
 }

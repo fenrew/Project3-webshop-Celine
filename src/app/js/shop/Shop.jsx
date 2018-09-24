@@ -38,16 +38,20 @@ class App extends Component {
         products: products.result
       });
     });
-    api.get("/api/shop/user").then(user => {
-      let newTotalPrice = 0;
-      user.result.shoppingCart.map(
-        el => (newTotalPrice += el.price * el.quantity)
-      );
-      this.setState({
-        checkout: user.result.shoppingCart,
-        totalPrice: newTotalPrice
-      });
+    
+    const savedUser = localStorage.getItem("shopping-cart")
+    if(!savedUser) return
+
+    const user = JSON.parse(savedUser)
+    let newTotalPrice = 0;
+    user.shoppingCart.forEach(
+      el => (newTotalPrice += el.price * el.quantity)
+    );
+    this.setState({
+      checkout: user.shoppingCart,
+      totalPrice: newTotalPrice
     });
+
   }
 
   render() {
@@ -259,7 +263,8 @@ class App extends Component {
       if (!user) return;
       user.result.shoppingCart = newArray;
       user = user.result;
-      return api.post("/api/shop/cart", { user });
+      
+      localStorage.setItem("shopping-cart", JSON.stringify(user))
     });
   }
 
@@ -268,11 +273,7 @@ class App extends Component {
       checkout: [],
       totalPrice: 0
     });
-    api.get("/api/shop/user").then(user => {
-      user.result.shoppingCart = this.state.checkout;
-      user = user.result;
-      return api.post("/api/shop/cart", { user });
-    });
+    localStorage.removeItem("shopping-cart")
   }
 
   _removeProduct(product) {
@@ -297,7 +298,7 @@ class App extends Component {
       if (!user) return;
       user.result.shoppingCart = newArray;
       user = user.result;
-      return api.post("/api/shop/cart", { user });
+      localStorage.setItem("shopping-cart", JSON.stringify(user))
     });
   }
 }
