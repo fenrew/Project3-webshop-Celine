@@ -1,33 +1,54 @@
+.whole-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
 .each-purchase-container{
     display: flex;
     justify-content: center;
-    margin: 3vw auto 0 auto;
-    font-size: 1.7vw;
+    margin: 2vw 0vw;
+    font-size: 1.3vw;
     border: 2px solid black;
-    width: 70%;
-    padding: 2vw;
+    width: 45%;
+    padding: 1vw;
+    position: relative;
 }
 
 .each-purchase-container h2 {
     text-decoration: underline;
-    margin: 0 0 1.5vw 0;
+    margin: 0.5vw 0 1.5vw 0;
+    line-height: 0;
+    font-size: 1.7vw;
+}
+
+.each-purchase-button {
+    position: absolute;
+    left: 2vw;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: green;
+    border: 3px solid black;
+    z-index: 3;
 }
 
 .text-box-info {
     display: flex;
-    line-height: 2.5vw;
+    line-height: 1.8vw;
 }
 
 .text-box-info-first-box {
-    margin: 0 2vw 0 0;
+    margin: 0 1vw 0 0;
 }
 
 .each-purchase-information {
-    margin: 0 10vw 0 0;
+    margin: 0 3vw 0 0;
 }
 
 .each-item {
-    margin: 2vw 0;
+    margin: 1vw 0;
+    line-height: 1vw;
 }
 
 table td {

@@ -18,6 +18,10 @@ const purchaseSchema = new Schema({
         type: Boolean,
         default: false
     },
+    color: {
+        type: String,
+        default: "white"
+    }
 })
 
 module.exports = mongoose.model('Purchase', purchaseSchema)

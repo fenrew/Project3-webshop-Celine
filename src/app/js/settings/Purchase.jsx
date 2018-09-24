@@ -1,57 +1,104 @@
-import React from "react";
+import React, { Component } from 'react';
 import EachItem from "./EachItem";
+import api from "../utils/api";
 
-const Purchase = props => {
-  const mappedItems = props.items.map((el, index) => (
-    <EachItem
-      name={el.name}
-      quantity={el.quantity}
-      price={el.price}
-      key={index}
-    />
-  ));
+class Purchase extends Component {
+  constructor(props) {
+    super(props);
 
-  let datoSpliced = props.date
-  datoSpliced.split("").splice((datoSpliced.length - 5), 1).join("")
-  console.log(datoSpliced)
+    this.state = {
+      loading: true,
+      color: "white",
+    };
+
+    this._changeColor = this._changeColor.bind(this);
+  }
+
+  componentDidMount(){
+    let id = this.props.id
+    api.post("/api/get/productId", {id}).then((product) => {
+      let newColor = product.newColor
+      this.setState({
+        color: newColor,
+        loading: false,
+      })
+    })
+  }
+
+  render() {
+    if (this.state.loading) {
+      return (
+        <div>
+          <div className="navigation-fix" />
+          <h1>Loading...</h1>
+        </div>
+      );
+    }
+    const mappedItems = this.props.items.map((el, index) => (
+      <EachItem
+        name={el.name}
+        quantity={el.quantity}
+        price={el.price}
+        key={index}
+      />
+    ));
   
-  let betalt = "Nei";
-  if (props.charged) betalt = "Ja";
-
-  return (
-    <div className="each-purchase-container">
-      <div className="each-purchase-information">
-        <h2>Informasjon:</h2>
-        <div className="text-box-info">
-          <div className="text-box-info-first-box">
-            <b>Navn:</b> <br/>
-            <b>E-post:</b> <br />
-            <b>Telefonnummer:</b> <br />
-            <b>Adresse:</b> <br />
-            <b>Postnummer:</b> <br />
-            <b>Poststed:</b> <br />
-            <b>Total Pris:</b> <br />
-            <b>Betalt:</b> <br />
-            <b>Dato:</b> <br />
-          </div>
-          <div>
-            {props.name} <br />
-            {props.epost} <br />
-            {props.telephone} <br />
-            {props.address} <br />
-            {props.postnumber} <br />
-            {props.postplace} <br />
-            {props.totalPrice} kroner <br />
-            {betalt} <br />
+    let datoSpliced = this.props.date
+    let newDatoSpliced = datoSpliced.substring(0, 10)
+    let newTimeSplice = datoSpliced.substring(11, 16)
+    let betalt = "Nei";
+    if (this.props.charged) betalt = "Ja";
+      
+    let newBackgroundColor = {
+      backgroundColor: this.state.color,
+    }
+    return (
+      <div className="each-purchase-container" style={newBackgroundColor}>
+      <button className="each-purchase-button" onClick={() => {this._changeColor()}}></button>
+        <div className="each-purchase-information">
+          <h2>Informasjon:</h2>
+          <div className="text-box-info">
+            <div className="text-box-info-first-box">
+              <b>Navn:</b> <br/>
+              <b>E-post:</b> <br />
+              <b>Telefon:</b> <br />
+              <b>Adresse:</b> <br />
+              <b>Postnr:</b> <br />
+              <b>Poststed:</b> <br />
+              <b>Total Pris:</b> <br />
+              <b>Betalt:</b> <br />
+              <b>Dato:</b> <br />
+              <b>Tid:</b> <br />
+            </div>
+            <div>
+              {this.props.name} <br />
+              {this.props.epost} <br />
+              {this.props.telephone} <br />
+              {this.props.address} <br />
+              {this.props.postnumber} <br />
+              {this.props.postplace} <br />
+              {this.props.totalPrice} kroner <br />
+              {betalt} <br />
+              {newDatoSpliced} <br/>
+              {newTimeSplice} <br/>
+            </div>
           </div>
         </div>
+        <div className="each-purchase-products">
+          <h2>Produkter:</h2>
+          {mappedItems}
+        </div>
       </div>
-      <div className="each-purchase-products">
-        <h2>Produkter:</h2>
-        {mappedItems}
-      </div>
-    </div>
-  );
-};
+    );
+  }
+
+  _changeColor(){
+    this.setState({
+      color: "green"
+    });
+    let id = this.props.id
+    api.post("/api/post/productId", {id})
+  }
+}
 
 export default Purchase;

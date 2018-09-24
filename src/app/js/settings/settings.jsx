@@ -15,7 +15,6 @@ class settings extends Component {
 
   componentDidMount() {
     api.get("/api/purchased").then(purchasedItemsTwo => {
-      console.log(purchasedItemsTwo);
       let mappedItems = purchasedItemsTwo.result.map((el, index) => (
         <Purchase
           epost={el.userEpost}
@@ -28,10 +27,10 @@ class settings extends Component {
           totalPrice={el.totalPrice}
           charged={el.charged}
           date={el.date}
+          id={el._id}
           key={index}
         />
       ));
-      console.log(mappedItems);
       this.setState({
         purchasedItems: mappedItems,
         loading: false
@@ -54,7 +53,9 @@ class settings extends Component {
     return (
       <div>
         <div className="navigation-fix" />
+        <div className="whole-container">
         {mappedPurchasedItems}
+        </div>
       </div>
     );
   }
