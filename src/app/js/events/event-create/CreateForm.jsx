@@ -3,12 +3,12 @@ import React from "react";
 const CreateForm = props => {
   return (
     <div className="create-event-form-container">
-      From:{" "}
+      Fra:{" "} <br/>
       <input
         type="datetime-local"
         onChange={evt => props.handleChange("fromTime", evt.target.value)}
-      />{" "}
-      To:{" "}
+      /> <br/>
+      Til:{" "} <br/>
       <input
         type="datetime-local"
         onChange={evt => props.handleChange("toTime", evt.target.value)}

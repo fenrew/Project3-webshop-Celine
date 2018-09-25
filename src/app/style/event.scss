@@ -1,21 +1,38 @@
 .create-event-form-container {
-    margin: 5vw auto;
-    width: 80%;
+  margin: 5vw auto;
+  width: 80%;
+  font-size: 1.6vw;
 }
 
-.event-created-success{
-    margin: 0 auto;
-    text-align: center;
-    font-size: 2vw;
+.create-event-form-container input {
+  width: 33vw;
+  border: 3px solid rgb(221, 195, 195);
+  padding: 2px;
+  margin: 0.6vw auto;
+  font-size: 1.2vw;
+  display: inline-block;
+}
+
+.create-event-form-container textarea {
+  width: 33vw;
+  border: 3px solid rgb(221, 195, 195);
+  padding: 2px;
+  font-size: 1.2vw;
+}
+
+.event-created-success {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 2vw;
 }
 
 .event-created-success table {
-    margin: 0 auto;
-    border-spacing: 0;
-    border: 2px solid black;
+  margin: 0 auto;
+  border-spacing: 0;
+  border: 2px solid black;
 }
 
 .event-created-success td {
-    border: 1px solid rgb(160, 160, 160);
-    padding: 0.5vw;
+  border: 1px solid rgb(160, 160, 160);
+  padding: 0.5vw;
 }

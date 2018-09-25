@@ -130,17 +130,20 @@ router.get("/blog", (req, res) => {
 
 //--------------- EVENT -------------//
 router.post("/events", (req, res) => {
-  let eventInfo = req.body.eventInfo
-  const newEvent = Events({
-    fromTime: eventInfo.fromTime,
-    toTime: eventInfo.toTime,
-    header: eventInfo.header,
-    oneliner: eventInfo.oneliner,
-    info: eventInfo.info,
-    img: eventInfo.img,
+  User.findById(req.user._id).then(user => {
+    if (user.role !== "admin") return;
+    let eventInfo = req.body.eventInfo
+    const newEvent = Events({
+      fromTime: eventInfo.fromTime,
+      toTime: eventInfo.toTime,
+      header: eventInfo.header,
+      oneliner: eventInfo.oneliner,
+      info: eventInfo.info,
+      img: eventInfo.img,
+    })
+    newEvent.save();
+    res.send(true)
   })
-  newEvent.save();
-  res.send(true)
 })
 
 //---------------
