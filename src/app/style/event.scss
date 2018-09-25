@@ -1,7 +1,12 @@
 .create-event-form-container {
-  margin: 5vw auto;
-  width: 80%;
+  margin: 5vw 0;
   font-size: 1.6vw;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .create-event-form-container input {
@@ -18,6 +23,7 @@
   border: 3px solid rgb(221, 195, 195);
   padding: 2px;
   font-size: 1.2vw;
+  margin-top: 1vw;
 }
 
 .event-created-success {
@@ -35,4 +41,23 @@
 .event-created-success td {
   border: 1px solid rgb(160, 160, 160);
   padding: 0.5vw;
+}
+
+.create-event-form-container button {
+    width: 34vw;
+  font-family: "Maitree", sans-serif;
+  line-height: 0;
+  height: 2.2vw;
+  font-size: 1.7vw;
+  font-weight: bold;
+  background-color: rgb(216, 62, 62);
+  border: 2px solid rgb(235, 160, 160);
+  border-radius: 5%;
+  color: white;
+  align-self: center;
+  margin-top: 2vw;
+}
+
+.datetime-local-event-create {
+  margin-left: -2vw;
 }

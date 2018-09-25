@@ -129,6 +129,26 @@ router.get("/blog", (req, res) => {
 //---------------
 
 //--------------- EVENT -------------//
+
+router.get("/user/admin", (req, res) => {
+  User.findById(req.user._id).then(user => {
+    if (user.role !== "admin") {
+      let response = false
+      res.send({response})
+    }
+    if (user.role === "admin") {
+      let response = true
+      res.send({response})
+    }
+  })
+})
+
+router.get("/all/events", (req, res) => {
+  Events.find().then((events) => {
+    res.send({events});
+  })
+})
+
 router.post("/events", (req, res) => {
   User.findById(req.user._id).then(user => {
     if (user.role !== "admin") return;
