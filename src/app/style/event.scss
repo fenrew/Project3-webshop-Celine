@@ -1,0 +1,21 @@
+.create-event-form-container {
+    margin: 5vw auto;
+    width: 80%;
+}
+
+.event-created-success{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2vw;
+}
+
+.event-created-success table {
+    margin: 0 auto;
+    border-spacing: 0;
+    border: 2px solid black;
+}
+
+.event-created-success td {
+    border: 1px solid rgb(160, 160, 160);
+    padding: 0.5vw;
+}

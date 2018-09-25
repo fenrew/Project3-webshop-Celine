@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Shop = require("../../models/Shop");
 const User = require("../../models/User");
+const Events = require("../../models/Events");
 const Purchase = require("../../models/Purchase");
 
 const authRoutes = require("./auth");
@@ -111,9 +112,6 @@ router.get("/blog", (req, res) => {
     let imgTwo = $(".entry-content").eq(1).find("img").eq(0).attr('src');
     // let imgTwoText = imgTwo.text();
     let imgThree = $(".entry-content").eq(2).find("img").eq(0).attr('src')
-    console.log("ONE",imgOne)
-    console.log(imgTwo)
-    console.log(imgThree)
     res.send({
       headerOneText,
       paragraphOneText,
@@ -127,6 +125,23 @@ router.get("/blog", (req, res) => {
     });
   });
 });
+
+//---------------
+
+//--------------- EVENT -------------//
+router.post("/events", (req, res) => {
+  let eventInfo = req.body.eventInfo
+  const newEvent = Events({
+    fromTime: eventInfo.fromTime,
+    toTime: eventInfo.toTime,
+    header: eventInfo.header,
+    oneliner: eventInfo.oneliner,
+    info: eventInfo.info,
+    img: eventInfo.img,
+  })
+  newEvent.save();
+  res.send(true)
+})
 
 //---------------
 

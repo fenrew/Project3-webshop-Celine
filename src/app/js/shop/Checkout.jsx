@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import api from "../utils/api";
 import Products from "./Products";
 import CheckoutForm from "./CheckoutForm";
-// import {CardElement, injectStripe} from 'react-stripe-elements';
 import "babel-polyfill";
 
 import { Elements, StripeProvider } from "react-stripe-elements";
@@ -54,19 +53,6 @@ class Checkout extends Component {
     return (
       <StripeProvider apiKey="pk_test_Hu2hQvuxdFzg6dJJUBD65JW9">
         <div>
-          {/* <div className="navigation-fix" />
-          <div className="checkout-cart-container">
-          <h1>Handlekurv:</h1>
-          <div className="checkout-mapped-products">
-          {mappedProducts}
-          <hr/>
-          </div>
-          <h1 className="checkout-cart-total">Total Pris:</h1>
-          <div className="checkout-cart-total-price">
-          {this.state.totalPrice}
-          ,-
-          </div>
-          </div> */}
           <div className="StripeElement">
           <br/>
           <br/>

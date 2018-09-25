@@ -3,10 +3,11 @@ import React, { Component } from "react";
 class aboutMe extends Component {
   render() {
     return (
-      <div>
+      <div className="the-whole-aboutme-container">
         <div className="navigation-fix" />
-        <img src={"https://res.cloudinary.com/doecwsnly/image/upload/v1537789233/4w.jpg"} alt="" className="image-aboutme"/>
         <div className="about-text-container">
+        <img src={"https://res.cloudinary.com/doecwsnly/image/upload/v1537789233/4w.jpg"} alt="" className="image-aboutme"/>
+        <div className="aboutme-only-text">
         <span>Jeg er 21 år og en gladjente fra Oslo.</span> Jeg er opptatt av en naturlig,
         god livsstil og ernæring, det er min medisin. Jeg har 1,5 år igjen som
         ernæringsstudent på Tunsberg Medisinske Skole, og er det en ting jeg har
@@ -18,6 +19,7 @@ class aboutMe extends Component {
         bilder både bak og foran kamera som jeg deler her på bloggen og
         Instagram. Håper jeg kan inspirere deg gjennom å dele min kunnskap,
         oppskrifter og mine tanker♥
+        </div>
         </div>
       </div>
     );

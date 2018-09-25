@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CurrentEvents from "./CurrentEvents"
-import CreateEvent from "./CreateEvent"
+import CreateEvent from "./event-create/CreateEvent"
 
 class events extends Component {
     constructor(props) {
