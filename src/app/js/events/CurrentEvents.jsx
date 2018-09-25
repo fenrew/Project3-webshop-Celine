@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CurrentEvents = () => {
+const CurrentEvents = props => {
     return (
         <div>
             
