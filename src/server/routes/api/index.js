@@ -38,8 +38,8 @@ router.get("/purchased", checkLoggedIn, (req, res) => {
     if (user.role !== "admin") return;
     return Purchase.find().then(result => {
       result.sort((a, b) => {
-        return new Date(b.date).getTime() - new Date(a.date).getTime() 
-      })
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
       res.send({ result });
     });
   });
@@ -52,21 +52,21 @@ router.post("/post/productId", checkLoggedIn, (req, res) => {
       req.body.id,
       { color: "green" },
       { new: true }
-    ).then((result) => {
-      console.log(result)
-    })
-  })
+    ).then(result => {
+      console.log(result);
+    });
+  });
 });
 
 router.post("/get/productId", checkLoggedIn, (req, res) => {
   User.findById(req.user._id).then(user => {
     if (user.role !== "admin") return;
     return Purchase.findById(req.body.id).then(result => {
-    let newColor = result.color
-    res.send({ newColor });
+      let newColor = result.color;
+      res.send({ newColor });
+    });
   });
 });
-})
 
 router.get("/check-out", (req, res) => {
   Shop.find({ name: "Vill Appelsin" }).then(result => {
@@ -84,6 +84,51 @@ router.get("/protected", checkLoggedIn, (req, res) => {
   console.log("USER", req.user);
   res.send({ success: true });
 });
+
+//-------------------------- BLOG -------------------------//
+const request = require("request");
+const cheerio = require("cheerio");
+
+let url = "http://www.celineheldrup.no/";
+
+router.get("/blog", (req, res) => {
+  request(url, function(err, resp, body) {
+    var $ = cheerio.load(body);
+    let headerOne = $(".entry-title").eq(0);
+    let headerTwo = $(".entry-title").eq(1);
+    let headerThree = $(".entry-title").eq(2);
+    let headerOneText = headerOne.text();
+    let headerTwoText = headerTwo.text();
+    let headerThreeText = headerThree.text();
+    let paragraphOne = $(".entry-content").eq(0).find("p").eq(0);
+    let paragraphOneText = paragraphOne.text();
+    let paragraphTwo = $(".entry-content").eq(1).find("p").eq(0);
+    let paragraphTwoText = paragraphTwo.text();
+    let paragraphThree = $(".entry-content").eq(2).find("p").eq(0);
+    let paragraphThreeText = paragraphThree.text();
+    let imgOne = $(".entry-content img").attr('src');
+    // let imgOneText = imgOne.text();
+    let imgTwo = $(".entry-content").eq(1).find("img").eq(0).attr('src');
+    // let imgTwoText = imgTwo.text();
+    let imgThree = $(".entry-content").eq(2).find("img").eq(0).attr('src')
+    console.log("ONE",imgOne)
+    console.log(imgTwo)
+    console.log(imgThree)
+    res.send({
+      headerOneText,
+      paragraphOneText,
+      imgOne,
+      headerTwoText,
+      paragraphTwoText,
+      imgTwo,
+      headerThreeText,
+      paragraphThreeText,
+      imgThree,
+    });
+  });
+});
+
+//---------------
 
 router.use("/auth", authRoutes);
 router.use("/checkout", checkoutRoutes);

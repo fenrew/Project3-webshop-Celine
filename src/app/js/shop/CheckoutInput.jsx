@@ -2,7 +2,7 @@ import React from "react";
 
 const CheckoutInput = props => {
   return (
-    <div>
+    <div className="checkout-information-inputs">
       <label htmlFor="navn">Navn: </label>
       <input
         type="text"
