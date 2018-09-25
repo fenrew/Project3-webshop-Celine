@@ -10,7 +10,7 @@ const Navigation = props => {
         <Link to="/">Hjem</Link>
         <Link to="/shop">Butikk</Link>
         <Link to="/doterra">doTERRA eteriske</Link>
-        <Link to="/kurs-og-foredrag">Kurs & foredrag</Link>
+        <Link to="/events">Kurs & foredrag</Link>
         <Link to="/blog">Blogg</Link>
         <Link to="/about-me">Om meg</Link>
         {link}

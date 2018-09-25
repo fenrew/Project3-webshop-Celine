@@ -14,6 +14,7 @@ import Checkout from "./shop/Checkout"
 import AboutMe from "./about/aboutMe"
 import Blog from "./blog/blog"
 import Settings from "./settings/settings"
+import Events from "./events/events"
 
 class Application extends React.Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class Application extends React.Component {
                         <Route exact path="/about-me" render={() => <AboutMe user={this.state.user} />} />
                         <Route exact path="/blog" render={() => <Blog user={this.state.user} />} />
                         <Route exact path="/settings" render={() => <Settings user={this.state.user} />} />
+                        <Route exact path="/events" render={() => <Events user={this.state.user} />} />
                         <Route
                             path="/auth"
                             render={() => <Auth setUser={this._setUser} resetUser={this._resetUser} />}
