@@ -61,8 +61,10 @@ class blog extends Component {
     return (
       <div>
         <div className="navigation-fix" />
+        <div className="blog-site-container">
         <div className="the-whole-blog-container">
         {mappedBlogs}
+        </div>
         </div>
       </div>
     );
