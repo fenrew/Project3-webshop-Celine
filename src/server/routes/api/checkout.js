@@ -6,37 +6,59 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config");
 const upload = require("../../utils/upload");
 const stripe = require("stripe")("sk_test_UankGAeDRDHAmwDfBCv0YzaY");
+const Purchase = require("../../models/Purchase");
 
 router.post("/charge", async (req, res, next) => {
-  // /api/checkout/charge
-  try {
-    let totalPrice = 0;
-    User.findById(req.user._id).then(result => {
-      //let products = []
-      //REMEMBER: totalPrice * 100
-      result.shoppingCart.map(el => {
-        totalPrice += el.price * el.quantity;
-      }); 
-      totalPrice.toString()
-      console.log(totalPrice)
+  let statusSend = ""
+  const shoppingCart = req.body.shoppingCart;
+  let totalPrice = 0;
+  shoppingCart.forEach(el => {
+    totalPrice += el.price * el.quantity
+  })
+  totalPrice = Math.floor(totalPrice * 100);
+  
+  let { status } = await stripe.charges.create({
+    amount: totalPrice,
+    currency: "NOK",
+    description: "An example charge",
+    source: req.body.token.id
+  })
+    .then(({ status }) => {
+      statusSend = { status }
+      return User.findById(req.user._id);
+    }).then((user) => {
+      totalPrice /= 100;
+      if (!user) {
+        const newPurchase = Purchase({
+          date: new Date,
+          userEpost: "",
+          userRef: "",
+          userInformation: req.body.userInformation,
+          items: shoppingCart,
+          totalPrice: totalPrice,
+          charged: true,
+        });
+        newPurchase.save()
+      } else if (user) {
+          const newPurchase = Purchase({
+            date: new Date,
+            userEpost: user.email,
+            userRef: user._id,
+            userInformation: req.body.userInformation,
+            items: shoppingCart,
+            totalPrice: totalPrice,
+            charged: true,
+          });
+        newPurchase.save()
+      }
+      res.send(statusSend);
+    })
+    .catch(err => {
+      console.error(err);
+      res
+        .status(500)
+        .send({ error: "something bad happened in the checkout process." });
     });
-    let { status } = await stripe.charges.create({
-      amount: "1000",
-      currency: "NOK",
-      description: "An example charge",
-      source: req.body.token.id
-    });
-    User.findById(req.user._id).then(result => {
-      //let products = []
-      //REMEMBER: totalPrice * 100
-      result.shoppingCart = [];
-      result.save();
-      return res.json({ status })
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).end();
-  }
 });
 
 module.exports = router;

@@ -8,8 +8,9 @@
 }
 
 .stripe-checkout-card-info {
-  font-size: 1.5vw;
-  line-height: 2vw;
+  font-size: 2vw;
+  line-height: 3vw;
+  margin-top: 3vw;
   font-family: "Maitree", sans-serif;
 }
 
@@ -24,6 +25,25 @@
   background-color: rgb(216, 62, 62);
   border: 2px solid rgb(235, 160, 160);
   color: white;
+}
+
+.checkout-information-inputs {
+  font-size: 2vw;
+}
+
+.checkout-information-inputs label {
+  display: inline-block;
+  width: 13vw;
+  text-align: left;
+  margin-right: 2vw;
+  line-height: 3vw;
+}
+
+.checkout-information-inputs input {
+  width: 33vw;
+  font-size: 1.5vw;
+  border: 3px solid rgb(221, 195, 195);
+  padding: 2px;
 }
 
 // .checkout-cart-container {

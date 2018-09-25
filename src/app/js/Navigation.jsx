@@ -14,6 +14,7 @@ const Navigation = props => {
         <Link to="/blog">Blogg</Link>
         <Link to="/about-me">Om meg</Link>
         {link}
+        <Link to="/settings"><img src={"https://res.cloudinary.com/doecwsnly/image/upload/v1537793247/Settings.png"} alt="" id="rediger-image"/></Link>
     </div>
 };
 
