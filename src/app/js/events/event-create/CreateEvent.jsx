@@ -13,11 +13,12 @@ class CreateEvent extends Component {
             header: "",
             oneliner: "",
             info: "",
-            img: "",
+            img: [],
         }
 
         this._handleChange = this._handleChange.bind(this)
         this._createEvent = this._createEvent.bind(this)
+        this._addPicture = this._addPicture.bind(this)
     }
 
     render() {
@@ -62,6 +63,7 @@ class CreateEvent extends Component {
                 oneliner={this.state.oneliner}
                 info={this.state.info}
                 img={this.state.img}
+                addPicture={this._addPicture}
                 createEvent={this._createEvent}
                 />
             </div>
@@ -71,6 +73,16 @@ class CreateEvent extends Component {
     _handleChange(key, value) {
         this.setState({
             [key]: value,
+        })
+    }
+
+    _addPicture(value){
+        let newArray = this.state.img
+        if(!newArray) newArray = []
+        newArray.push(value)
+        console.log(newArray);
+        this.setState({
+            img: newArray
         })
     }
 
