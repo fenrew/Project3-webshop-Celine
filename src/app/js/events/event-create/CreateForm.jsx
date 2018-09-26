@@ -3,8 +3,8 @@ import React from "react";
 const CreateForm = props => {
   return (
     <div className="create-event-form-container">
-    <br/>
-    <br/>
+      <br />
+      <br />
       <div className="datetime-local-event-create">
         Fra:
         <input
@@ -36,19 +36,23 @@ const CreateForm = props => {
         />
       </div>
       <div>
-      <textarea
-        rows="6"
-        cols="100"
-        placeholder="Skriv event informasjon her..."
-        onChange={evt => props.handleChange("info", evt.target.value)}
-        value={props.info}
-      />
+        <textarea
+          rows="6"
+          cols="100"
+          placeholder="Skriv event informasjon her..."
+          onChange={evt => props.handleChange("info", evt.target.value)}
+          value={props.info}
+        />
       </div>
       <div>
-          <br/>
-          <br/>
-      <div>Legg til event bilder:</div>
-      <input type="file" placeholder="Legg til bilde" />
+        <br />
+        <br />
+        <div>Legg til event bilder:</div>
+        <input
+          type="file"
+          onChange={evt => props.addPicture(evt.target.files[0])}
+          placeholder="Legg til bilde"
+        />
       </div>
       <button onClick={() => props.createEvent()}>Legg til Event</button>
     </div>

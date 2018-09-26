@@ -1,4 +1,119 @@
+.whole-container-for-events {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  background-color: rgba(223, 223, 223, 0.698);
+}
+
+.shadow-container-events {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: white;
+  min-height: 100vh;
+}
+
+.each-event-container {
+  box-shadow: 0px 0px 8px 8px rgba(223, 223, 223, 0.698);
+  padding: 0.5vw 0.5vw 2vw 0.5vw;
+  margin: 4vw;
+}
+
+.each-event-container:hover {
+  box-shadow: 0px 0px 8px 8px rgba(71, 247, 65, 0.698);
+  cursor: pointer;
+}
+
+.each-event-container h1 {
+  font-size: 4vw;
+  line-height: 0;
+}
+
+.event-oneliner {
+  font-style: italic;
+  font-size: 1.4vw;
+  line-height: 2.5vw;
+  padding-bottom: 0.7vw;
+}
+
+.event-time {
+  font-size: 1.3vw;
+  line-height: 1.6vw;
+}
+
+
+//-------------  SPECIFIC EVENT ---------------//
+.the-whole-specific-event-container {
+  width: 100%;
+  background-color: rgba(223, 223, 223, 0.698);
+  min-height: 100vh;
+  position: relative;
+  color: rgb(61, 61, 61);
+}
+
+.specific-event-container {
+  width: 50%;
+  background-color: white;
+  padding: 5vh 6vw 5vh 6vw;
+  margin: 0 auto;
+  min-height: 90vh;
+  font-family: "Maitree", sans-serif;
+}
+
+.specific-event-button {
+  position: absolute;
+  border-radius: 5%;
+  background-color: rgba(118, 241, 93, 0.664);
+  border: 0px solid black;
+  padding: 0.2vw 0.5vw 0.2vw 0.5vw;
+  font-size: 1.7vw;
+  // box-shadow: 2px 2px 2px rgb(194, 164, 164);
+  outline: 0;
+  margin-top: -2vw;
+  margin-left: -4vw;
+}
+
+.specific-event-button:active {
+  outline: 0;
+}
+
+.specific-event-header {
+  text-align: center;
+  font-size: 4vw;
+  font-family: "Maitree", sans-serif;
+  font-weight: 300;
+  line-height: 0;
+}
+
+.specific-event-oneliner {
+  font-style: italic;
+  text-align: center;
+  font-size: 1.2vw;
+  line-height: 3vw;
+  padding-bottom: 1.5vw;
+}
+
+.specific-event-info {
+  text-align: center;
+  margin-top: 2vw;
+  font-size: 1.1vw;
+  padding: 0 4vw;
+}
+
+//-------------
+
+
+//---------------- CREATE EVENT -----------------------/
+
+.whole-container-for-create-events {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(223, 223, 223, 0.698);
+}
+
 .create-event-form-container {
+  background-color: white;
   margin: 5vw 0;
   font-size: 1.6vw;
   display: flex;
@@ -6,7 +121,8 @@
   flex-direction: column;
   text-align: center;
   width: 70%;
-  margin: 0 auto;
+  margin: 0 auto 0 auto;
+  padding-bottom: 3vw;
 }
 
 .create-event-form-container input {
@@ -44,7 +160,7 @@
 }
 
 .create-event-form-container button {
-    width: 34vw;
+  width: 34vw;
   font-family: "Maitree", sans-serif;
   line-height: 0;
   height: 2.2vw;
