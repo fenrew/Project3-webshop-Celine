@@ -89,7 +89,7 @@
 .specific-event-oneliner {
   font-style: italic;
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 1.4vw;
   line-height: 3vw;
   padding-bottom: 1.5vw;
 }
@@ -99,6 +99,21 @@
   margin-top: 2vw;
   font-size: 1.1vw;
   padding: 0 4vw;
+  white-space: pre;
+}
+
+.remove-event {
+  position: absolute;
+  background-color: rgba(252, 49, 49, 0.794);
+  padding: 0.5vw 0.7vw;
+  border-radius: 100%;
+  right: 20.5vw;
+  z-index: 50;
+  cursor: pointer;
+}
+
+.remove-event:hover {
+  box-shadow: 0 0 1px 3px rgb(192, 0, 0);
 }
 
 //-------------
@@ -159,7 +174,7 @@
   padding: 0.5vw;
 }
 
-.create-event-form-container button {
+.add-event-button {
   width: 34vw;
   font-family: "Maitree", sans-serif;
   line-height: 0;
@@ -172,6 +187,21 @@
   color: white;
   align-self: center;
   margin-top: 2vw;
+}
+
+.upload-image-event {
+  width: 10vw;
+  font-family: "Maitree", sans-serif;
+  line-height: 0;
+  height: 2.2vw;
+  font-size: 1vw;
+  font-weight: bold;
+  background-color: rgb(62, 160, 216);
+  border: 2px solid rgb(160, 214, 235);
+  border-radius: 5%;
+  color: white;
+  align-self: center;
+  margin-top: 0.3vw;
 }
 
 .datetime-local-event-create {

@@ -6,16 +6,20 @@ class Carousel extends Component {
     super(props);
 
     this.state = {
+      whereInCarousel: 0,
       numberFirstGradient: 100,
       numberSecondGradient: 80,
+      numberThirdGradient: 80,
       numberFirstWidth: 100,
       numberSecondWidth: 0,
+      numberThirdWidth: 0,
       headerTextOne: "Celine Heldrup", //Celine Heldrup
       paragraphTextOne: "Blog og Ernæring", //Blog og Ernæring
       headerTextTwo: "", //Eteriske Oljer
       paragraphTextTwo: "", //En naturlig kilde til god helse
       colorStyleFirst: "Transparent",
-      colorStyleSecond: "Transparent"
+      colorStyleSecond: "Transparent",
+      colorStyleThird: "Transparent"
     };
 
     this.fadingContinue = true;
@@ -30,7 +34,7 @@ class Carousel extends Component {
   }
 
   componentDidUpdate(newProps, newState) {
-    const header = document.querySelector(".background-header-0");
+    const header = document.querySelector(".background-header-" + this.state.whereInCarousel);
     const bgString = `linear-gradient(to left, rgba(255, 0, 0, 0) ${
       newState.numberFirstGradient
     }%, rgb(235, 235, 235) ${newState.numberSecondGradient}%)`;
@@ -60,15 +64,30 @@ class Carousel extends Component {
         paragraphText: this.state.paragraphTextOne,
         image: "url('https://res.cloudinary.com/doecwsnly/image/upload/v1537711707/CelineHomepagePhoto2.png')",
         widthStyle: widthStyleFirst,
-        colorStyle: colorStyleFirst
+        colorStyle: colorStyleFirst,
+        textAppearing: this._textFading,
+        textFading: this._textFadingReverse,
+        backgroundStyle: "background-0",
       },
       {
         headerText: this.state.headerTextTwo,
         paragraphText: this.state.paragraphTextTwo,
         image: "url('https://res.cloudinary.com/doecwsnly/image/upload/v1537711838/oils-background-image.png')",
         widthStyle: widthStyleSecond,
-        colorStyle: colorStyleSecond
-      }
+        colorStyle: colorStyleSecond,
+        textAppearing: this._textFading,
+        textFading: this._textFadingReverse,
+        backgroundStyle: "background-1"
+      },
+      // {
+      //   headerText: this.state.headerTextThree,
+      //   paragraphText: this.state.paragraphTextThree,
+      //   image: "url('https://res.cloudinary.com/doecwsnly/image/upload/v1537711838/oils-background-image.png')",
+      //   widthStyle: widthStyleSecond,
+      //   colorStyle: colorStyleSecond,
+      //   textAppearing: this._textFading,
+      //   textFading: this._textFadingReverse,
+      // },
     ];
 
     let mappedCarouselObject = carouselObject.map((el, index) => {
@@ -79,8 +98,9 @@ class Carousel extends Component {
           paragraphText={el.paragraphText}
           image={el.image}
           widthStyle={el.widthStyle}
-          textFadingReverse={this._textFadingReverse}
+          textFadingReverse={el.textFading}
           colorStyle={el.colorStyle}
+          backgroundStyle={el.backgroundStyle}
         />
       );
     });
@@ -132,7 +152,7 @@ class Carousel extends Component {
           colorStyleFirst: "transparent"
         });
         return this._textFadingReverse();
-      }, 15);
+      }, 10);
     } else {
       this.state.numberSecondGradient = 80;
       return this._carousel();
@@ -146,8 +166,20 @@ class Carousel extends Component {
     });
     setTimeout(() => {
       if (!this.fadingContinue) return;
-        
+      this.setState({
+        headerTextOne: "",
+        paragraphTextOne: "",
+        headerTextTwo: "Eteriske Oljer",
+        paragraphTextTwo: "En naturlig kilde til god helse"
+      })
+      
     }, 2000);
+  }
+
+  _boringTextFading(numberWidth, secondWidth) {
+    this.setState({
+      whereInCarousel: 1,
+    })
   }
 
 }

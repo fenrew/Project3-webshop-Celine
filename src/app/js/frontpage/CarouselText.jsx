@@ -6,7 +6,7 @@ const CarouselText = props => {
       }
 
   return (
-    <div className="background-0" style={Object.assign(props.widthStyle, backgroundImageFirst)}>
+    <div className={props.backgroundStyle} style={Object.assign(props.widthStyle, backgroundImageFirst)}>
       <div className="background-overlay-image">
         <div id="text-box-0" className="text-box">
           <h1 className="background-header-0">{props.headerText}</h1>

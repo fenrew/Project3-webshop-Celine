@@ -22,7 +22,8 @@ class Application extends React.Component {
 
         this.state = {
             user: this._setUser(true),
-            login: "Logg på"
+            login: "Logg på",
+            userRole: "",
         }
 
         this._setUser = this._setUser.bind(this)
@@ -31,6 +32,12 @@ class Application extends React.Component {
 
     componentDidMount() {
         this._setUser()
+        api.get("/api/shop/user").then((result) => {
+            let newUserRole = result.userRole
+            this.setState({
+                userRole: newUserRole
+            })
+        })
     }
 
     render() {
@@ -38,7 +45,7 @@ class Application extends React.Component {
             
             <BrowserRouter>
                 <div>
-                    <Navigation user={this.state.user} login={this.state.login} />
+                    <Navigation user={this.state.user} login={this.state.login} userRole={this.state.userRole} />
                     <Switch>
                         <Route exact path="/" render={() => <Frontpage user={this.state.user} />} />
                         <Route exact path="/shop" render={() => <Shop user={this.state.user} />} />

@@ -16,7 +16,6 @@ class blog extends Component {
 
   componentDidMount() {
     api.get("/api/blog").then(result => {
-      console.log(result);
       let headOne = result.headerOneText;
       let headTwo = result.headerTwoText;
       let headThree = result.headerThreeText;
@@ -47,7 +46,6 @@ class blog extends Component {
         </div>
       );
     }
-    console.log(this.state.blogposts)
 
     let mappedBlogs = this.state.blogposts.map((el, index) => (
       <BlogPosts 

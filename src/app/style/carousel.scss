@@ -6,7 +6,7 @@
   }
   
   .background-0 {
-    background-size: 100% 100%;
+    background-size: cover;
     width: 100%;
     margin: 0 auto;
     color: rgb(243, 243, 243);
@@ -42,12 +42,12 @@
   }
   
   #background-1 {
-    background-image: url("../assets/oils-background-image.png");
-    background-size: 100% 100%;
+    background-size: cover;
     width: 0%;
     margin: 0 auto;
     color: rgb(243, 243, 243);
     transition: width 2s ease-in-out, color 2s ease-in-out;
+    background-repeat: no-repeat;
   }
   
   .background-overlay-image {

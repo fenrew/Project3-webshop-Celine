@@ -19,7 +19,8 @@ router.get("/models", (req, res) => {});
 
 router.get("/shop/user", (req, res) => {
   User.findById(req.user._id).then(result => {
-    res.send({ result });
+    let userRole = result.role
+    res.send({ result, userRole });
   });
 });
 
@@ -163,6 +164,16 @@ router.post("/events", (req, res) => {
     })
     newEvent.save();
     res.send(true)
+  })
+})
+
+router.post("/remove/event", (req, res) => {
+  User.findById(req.user._id).then(user => {
+    if (user.role !== "admin") return;
+    console.log(req.body)
+    Events.findByIdAndDelete(req.body.removedElement._id).then((result) => {
+      res.send(true)
+    })
   })
 })
 
