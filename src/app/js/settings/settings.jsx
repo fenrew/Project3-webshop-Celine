@@ -43,7 +43,7 @@ class settings extends Component {
       return (
         <div>
           <div className="navigation-fix" />
-          <h1>Loading...</h1>
+          <h1>This site is only for admins</h1>
         </div>
       );
     }

@@ -19,6 +19,7 @@ class CreateEvent extends Component {
         this._handleChange = this._handleChange.bind(this)
         this._createEvent = this._createEvent.bind(this)
         this._addPicture = this._addPicture.bind(this)
+        this._uploadImage = this._uploadImage.bind(this)
     }
 
     render() {
@@ -65,6 +66,7 @@ class CreateEvent extends Component {
                 img={this.state.img}
                 addPicture={this._addPicture}
                 createEvent={this._createEvent}
+                uploadImage={this._uploadImage}
                 />
             </div>
         );
@@ -102,6 +104,11 @@ class CreateEvent extends Component {
             })
         }
     }
+
+    _uploadImage() {
+        cloudinary.openUploadWidget({ cloud_name: 'demo', upload_preset: 'a5vxnzbp'}, 
+          function(error, result) { console.log(error, result) });
+      }
 }
 
 export default CreateEvent;

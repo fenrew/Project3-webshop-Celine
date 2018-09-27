@@ -18,6 +18,7 @@ class events extends Component {
 
     this._clickHandler = this._clickHandler.bind(this);
     this._clickGoBack = this._clickGoBack.bind(this);
+    this._removeEvent = this._removeEvent.bind(this)
   }
 
   componentDidMount() {
@@ -56,7 +57,9 @@ class events extends Component {
 
     let mappedEvents = this.state.events.map((el, index) => (
       <CurrentEvents
+        admin={this.state.admin}
         clickHandler={this._clickHandler}
+        removeEvent={this._removeEvent}
         header={el.header}
         oneliner={el.oneliner}
         info={el.info}
@@ -85,7 +88,9 @@ class events extends Component {
     return (
       <div>
         <div className="navigation-fix" />
-        <div className="whole-container-for-events">{mappedEvents}</div>
+        <div className="whole-container-for-events">
+          <div className="shadow-container-events">{mappedEvents}</div>
+        </div>
       </div>
     );
   }
@@ -98,10 +103,23 @@ class events extends Component {
   }
 
   _clickGoBack() {
-      this.setState({
-        siteSpecific: false,
-        singelEvent: ""
-      })
+    this.setState({
+      siteSpecific: false,
+      singelEvent: ""
+    });
+  }
+
+  _removeEvent(index) {
+    let newEvents = this.state.events
+    let removedElement = newEvents[index]
+    newEvents.splice(index, 1)
+    api.post("/api/remove/event", {removedElement}).then((result) => {
+      if(result) {
+        this.setState({
+          events: newEvents
+        })
+      }
+    })
   }
 }
 

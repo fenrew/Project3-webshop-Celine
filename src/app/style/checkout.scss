@@ -25,6 +25,11 @@
   background-color: rgb(216, 62, 62);
   border: 2px solid rgb(235, 160, 160);
   color: white;
+  outline: 0;
+}
+
+.stripe-pay-button:active {
+  outline: 0;
 }
 
 .checkout-information-inputs {

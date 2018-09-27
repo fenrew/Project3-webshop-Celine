@@ -10,7 +10,7 @@ const CheckoutInput = props => {
         placeholder="Skriv inn navnet ditt"
         onChange={evt => props.handleInputChange("name", evt.target.value)}
         value={props.name}
-        maxlength="30"
+        maxLength="30"
       />
       <br />
       <label htmlFor="telefonnummer">Telefonnummer: </label>
@@ -20,7 +20,7 @@ const CheckoutInput = props => {
         placeholder="Skriv inn telefonnummeret ditt"
         onChange={evt => props.handleInputChange("telephone", evt.target.value)}
         value={props.telephone}
-        maxlength="20"
+        maxLength="20"
       />
       <br />
       <label htmlFor="adresse">Adresse: </label>
@@ -30,7 +30,7 @@ const CheckoutInput = props => {
         placeholder="Skriv inn adressen din"
         onChange={evt => props.handleInputChange("address", evt.target.value)}
         value={props.address}
-        maxlength="30"
+        maxLength="40"
       />
       <br />
       <label htmlFor="postnummer">Postnummer: </label>
@@ -42,7 +42,7 @@ const CheckoutInput = props => {
           props.handleInputChange("postnumber", evt.target.value)
         }
         value={props.postnumber}
-        maxlength="10"
+        maxLength="10"
       />
       <br />
       <label htmlFor="poststed">Poststed: </label>
@@ -52,7 +52,7 @@ const CheckoutInput = props => {
         placeholder="Skriv inn poststedet ditt"
         onChange={evt => props.handleInputChange("postplace", evt.target.value)}
         value={props.postplace}
-        maxlength="15"
+        maxLength="15"
       />
       <br />
     </div>

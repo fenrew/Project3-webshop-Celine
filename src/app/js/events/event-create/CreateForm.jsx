@@ -48,13 +48,11 @@ const CreateForm = props => {
         <br />
         <br />
         <div>Legg til event bilder:</div>
-        <input
-          type="file"
-          onChange={evt => props.addPicture(evt.target.files[0])}
-          placeholder="Legg til bilde"
-        />
+        <button className="upload-image-event" onClick={() => props.uploadImage()}>Legg til bilder</button>
       </div>
-      <button onClick={() => props.createEvent()}>Legg til Event</button>
+      <br/>
+      <br/>
+      <button className="add-event-button" onClick={() => props.createEvent()}>Legg til Event</button>
     </div>
   );
 };

@@ -19,7 +19,8 @@ router.get("/models", (req, res) => {});
 
 router.get("/shop/user", (req, res) => {
   User.findById(req.user._id).then(result => {
-    res.send({ result });
+    let userRole = result.role
+    res.send({ result, userRole });
   });
 });
 
@@ -30,6 +31,18 @@ router.post("/shop/cart", (req, res) => {
     { shoppingCart: user.shoppingCart },
     { new: true }
   ).then(result => {
+    result.save();
+  });
+});
+
+router.post("/shop/cart/remove", (req, res) => {
+  const user = req.body.user;
+  User.findByIdAndUpdate(
+    user._id,
+    { shoppingCart: [] },
+    { new: true }
+  ).then(result => {
+    console.log(result)
     result.save();
   });
 });
@@ -163,6 +176,16 @@ router.post("/events", (req, res) => {
     })
     newEvent.save();
     res.send(true)
+  })
+})
+
+router.post("/remove/event", (req, res) => {
+  User.findById(req.user._id).then(user => {
+    if (user.role !== "admin") return;
+    console.log(req.body)
+    Events.findByIdAndDelete(req.body.removedElement._id).then((result) => {
+      res.send(true)
+    })
   })
 })
 

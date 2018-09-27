@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CarouselText from "./CarouselText";
 
 class Carousel extends Component {
   constructor(props) {
@@ -8,21 +7,30 @@ class Carousel extends Component {
     this.state = {
       numberFirstGradient: 100,
       numberSecondGradient: 80,
-      numberFirstWidth: 100,
-      numberSecondWidth: 0,
-      headerTextOne: "Celine Heldrup", //Celine Heldrup
-      paragraphTextOne: "Blog og Ernæring", //Blog og Ernæring
-      headerTextTwo: "", //Eteriske Oljer
-      paragraphTextTwo: "", //En naturlig kilde til god helse
-      colorStyleFirst: "Transparent",
-      colorStyleSecond: "Transparent"
+
+      widthOne: "100%",
+      widthTwo: "0%",
+      widthThree: "0%",
+      widthFour: "0%",
+      headerOne: "Celine Heldrup",
+      headerTwo: "",
+      headerThree: "",
+      headerFour: "",
+      fadingClassOne: "background-header",
+      fadingClassTwo: "",
+      fadingClassThree: "",
+      fadingClassFour: "",
+      wordSizeOne: "8vw",
+      wordSizeTwo: "8vw",
+      wordSizeThree: "8vw",
+      wordSizeFour: "8vw"
     };
-
     this.fadingContinue = true;
+    this.slideContinue = true;
 
+    this._newSlide = this._newSlide.bind(this);
     this._textFading = this._textFading.bind(this);
     this._textFadingTwo = this._textFadingTwo.bind(this);
-    this._textFadingReverse = this._textFadingReverse.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +38,7 @@ class Carousel extends Component {
   }
 
   componentDidUpdate(newProps, newState) {
-    const header = document.querySelector(".background-header-0");
+    const header = document.querySelector(".background-header");
     const bgString = `linear-gradient(to left, rgba(255, 0, 0, 0) ${
       newState.numberFirstGradient
     }%, rgb(235, 235, 235) ${newState.numberSecondGradient}%)`;
@@ -41,53 +49,171 @@ class Carousel extends Component {
   }
 
   render() {
-    let widthStyleFirst = {
-      width: this.state.numberFirstWidth + "%"
+    let widthOne = {
+      width: this.state.widthOne
     };
-    let widthStyleSecond = {
-      width: this.state.numberSecondWidth + "%"
+    let widthTwo = {
+      width: this.state.widthTwo
     };
-    let colorStyleFirst = {
-      color: this.state.colorStyleFirst
+    let widthThree = {
+      width: this.state.widthThree
     };
-    let colorStyleSecond = {
-      color: this.state.colorStyleSecond
+    let widthFour = {
+      width: this.state.widthFour
+    };
+    let fontOne = {
+      fontSize: this.state.wordSizeOne
+    };
+    let fontTwo = {
+      fontSize: this.state.wordSizeTwo
+    };
+    let fontThree = {
+      fontSize: this.state.wordSizeThree
+    };
+    let fontFour = {
+      fontSize: this.state.wordSizeFour
     };
 
-    const carouselObject = [
-      {
-        headerText: this.state.headerTextOne,
-        paragraphText: this.state.paragraphTextOne,
-        image: "url('https://res.cloudinary.com/doecwsnly/image/upload/v1537711707/CelineHomepagePhoto2.png')",
-        widthStyle: widthStyleFirst,
-        colorStyle: colorStyleFirst
-      },
-      {
-        headerText: this.state.headerTextTwo,
-        paragraphText: this.state.paragraphTextTwo,
-        image: "url('https://res.cloudinary.com/doecwsnly/image/upload/v1537711838/oils-background-image.png')",
-        widthStyle: widthStyleSecond,
-        colorStyle: colorStyleSecond
-      }
-    ];
+    return (
+      <div id="flex">
+        <div
+          id="background-0"
+          style={widthOne}
+          onClick={() =>
+            this._newSlide(
+              "widthOne",
+              "widthTwo",
+              "headerOne",
+              "headerTwo",
+              "doTERRA eteriske",
+              "fadingClassOne",
+              "fadingClassTwo",
+              "wordSizeOne",
+              "wordSizeTwo"
+            )
+          }
+        >
+          <div className="background-overlay-image">
+            <h1 className={this.state.fadingClassOne} style={fontOne}>
+              {this.state.headerOne}
+            </h1>
+          </div>
+        </div>
+        <div
+          id="background-1"
+          style={widthTwo}
+          onClick={() =>
+            this._newSlide(
+              "widthTwo",
+              "widthThree",
+              "headerTwo",
+              "headerThree",
+              "Kosthold og Ernæring",
+              "fadingClassTwo",
+              "fadingClassThree",
+              "wordSizeTwo",
+              "wordSizeThree"
+            )
+          }
+        >
+          <div className="background-overlay-image">
+            <div className="nagivation-fix" />
+            <h1 className={this.state.fadingClassTwo} style={fontTwo}>
+              {this.state.headerTwo}
+            </h1>
+          </div>
+        </div>
+        <div
+          id="background-2"
+          style={widthThree}
+          onClick={() =>
+            this._newSlide(
+              "widthThree",
+              "widthFour",
+              "headerThree",
+              "headerFour",
+              "Created by Markus Heldrup",
+              "fadingClassThree",
+              "fadingClassFour",
+              "wordSizeThree",
+              "wordSizeFour"
+            )
+          }
+        >
+          <div className="background-overlay-image">
+            <div className="nagivation-fix" />
+            <h1 className={this.state.fadingClassThree} style={fontThree}>
+              {this.state.headerThree}
+            </h1>
+          </div>
+        </div>
+        <div
+          id="background-3"
+          style={widthFour}
+          onClick={() =>
+            this._newSlide(
+              "widthFour",
+              "widthOne",
+              "headerFour",
+              "headerOne",
+              "Celine Heldrup",
+              "fadingClassFour",
+              "fadingClassOne",
+              "wordSizeFour",
+              "wordSizeOne"
+            )
+          }
+        >
+          <div className="background-overlay-image">
+            <div className="nagivation-fix" />
+            <h1 className={this.state.fadingClassFour} style={fontFour}>
+              {this.state.headerFour}
+            </h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-    let mappedCarouselObject = carouselObject.map((el, index) => {
-      return (
-        <CarouselText
-          key={index}
-          headerText={el.headerText}
-          paragraphText={el.paragraphText}
-          image={el.image}
-          widthStyle={el.widthStyle}
-          textFadingReverse={this._textFadingReverse}
-          colorStyle={el.colorStyle}
-        />
-      );
+  _newSlide(
+    self,
+    key,
+    headSelf,
+    headKey,
+    headValue,
+    fadeingSelf,
+    fadingKey,
+    fontSelf,
+    fontKey
+  ) {
+    if (!this.slideContinue) return;
+    this.slideContinue = false;
+    this.setState({
+      [self]: "0%",
+      [key]: "100%",
+      [fontSelf]: "0vw",
+      [fontKey]: "8vw"
     });
-    return <div id="carousel-container">{mappedCarouselObject}</div>;
+    setTimeout(() => {
+      this.setState({
+        [headSelf]: "",
+        numberFirstGradient: 100,
+        numberSecondGradient: 80,
+        [fadingKey]: "background-header",
+        [fadeingSelf]: ""
+      });
+    }, 1800);
+    setTimeout(() => {
+      this.setState({
+        [headKey]: headValue
+      });
+      this.slideContinue = true;
+      return this._textFading();
+    }, 2000);
   }
 
   _textFading() {
+    // console.log(this.state.numberFirstGradient)
     if (!this.fadingContinue) return;
     if (this.state.numberFirstGradient > 0) {
       this.state.numberFirstGradient--;
@@ -119,37 +245,6 @@ class Carousel extends Component {
       return;
     }
   }
-
-  _textFadingReverse() {
-    this.fadingContinue = false;
-    this.state.numberSecondGradient = 80;
-    if (this.state.numberFirstGradient < 99) {
-      this.state.numberFirstGradient++;
-      let newNumberFirstGradient = this.state.numberFirstGradient;
-      setTimeout(() => {
-        this.setState({
-          numberFirstGradient: newNumberFirstGradient,
-          colorStyleFirst: "transparent"
-        });
-        return this._textFadingReverse();
-      }, 15);
-    } else {
-      this.state.numberSecondGradient = 80;
-      return this._carousel();
-    }
-  }
-
-  _carousel() {
-    this.setState({
-      numberFirstWidth: 0,
-      numberSecondWidth: 100
-    });
-    setTimeout(() => {
-      if (!this.fadingContinue) return;
-        
-    }, 2000);
-  }
-
 }
 
 export default Carousel;

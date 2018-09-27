@@ -1,99 +1,71 @@
-#carousel-container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .background-0 {
-    background-size: 100% 100%;
-    width: 100%;
-    margin: 0 auto;
-    color: rgb(243, 243, 243);
-    transition: width 2s ease-in-out, color 2s ease-in-out;
-    background-repeat: no-repeat;
-    // background-image: url("../assets/blueberries.png");
-    // background-image: url("../assets/oils-background-image.png");
-    // background-image: url("../assets/heart-oil-background.png");
-    // background-image: url("../assets/ey.jpg");
-    // background-image: url("../assets/CelineHomepagePhoto2.png");
-    // background-image: url("../assets/products/digest-zen.png");
-    // background-image: url("../assets/products/frankincense.png");
-    // background-image: url("../assets/products/lavender.png");
-    // background-image: url("../assets/products/lemon.png");
-    // background-image: url("../assets/products/on-guard.png");
-    // background-image: url("../assets/products/oregano.png");
-    // background-image: url("../assets/products/peppermint.png");
-    // background-image: url("../assets/products/rosemary.png");
-    // background-image: url("../assets/products/wild-orange.png");
-    /* filter: grayscale(100%); */
-  }
-  
-  #text-box-0 h1 {
-    font-family: "Great Vibes", cursive;
-    font-size: 8vw;
-    transition: font-size 1.5s ease-in-out, transform 1.5s ease-in-out;
-    -webkit-text-fill-color: transparent;
-    color: rgb(230, 230, 230);
-  }
-  
-  .background-paragraph-0 {
-    transition: color 1.5s ease-in-out;
-  }
-  
-  #background-1 {
-    background-image: url("../assets/oils-background-image.png");
-    background-size: 100% 100%;
-    width: 0%;
-    margin: 0 auto;
-    color: rgb(243, 243, 243);
-    transition: width 2s ease-in-out, color 2s ease-in-out;
-  }
-  
-  .background-overlay-image {
-    background-color: rgba(0, 0, 0, 0.493);
-    height: 100%;
-  }
-  
-  .text-box {
-    text-align: center;
-    padding-top: 37vh;
-    font-family: "El Messiri", sans-serif;
-  }
-  
-  .text-box p {
-    font-size: 2.5vw;
-    text-align: center;
-  }
-  
-  .button {
-    background-color: transparent;
-    top: 45vh;
-    border: 0px;
-    font-size: 10vw;
-    transform: scale(0.5, 1);
-    outline: none;
-  }
-  
-  .button:hover {
-    color: rgb(75, 70, 70);
-  }
-  
-  .next-image-carousel {
-    position: absolute;
-    left: 90%;
-  }
-  
-  .previous-image-carousel {
-    position: absolute;
-    left: 10%;
-  }
-  
-  // @for $i from 1 through 100 {
-  //   &.perc-#{$i} {
-  //     border: 1px solid red;
-  //     background: linear-gradient(to left, rgba(255, 0, 0, 0) #{$i}%, rgb(224, 224, 224) 80%);
-  //     background-clip: text;
-  //     -webkit-background-clip: text;
-  //   }
-  // }
+
+#flex {
+  display: flex;
+}
+
+#flex h1 {
+  padding-top: 40vh;
+  text-align: center;
+  color: white;
+  transition: font-size 1.5s;
+  font-family: "Great Vibes", cursive;
+  margin: 0;
+  font-weight: 200;
+}
+
+/* Carousel */
+
+.maxWidth {
+  width: 100%;
+}
+
+.background-header {
+  -webkit-text-fill-color: transparent;
+}
+
+.background-overlay-image {
+  background-color: rgba(0, 0, 0, 0.493);
+  height: 100vh;
+}
+
+#background-0 {
+  background-image: url('https://res.cloudinary.com/doecwsnly/image/upload/v1538050162/ey.jpg');
+  background-size: cover;
+  margin: 0 auto;
+  color: rgb(243, 243, 243);
+  transition: width 2s ease-in-out, color 2s ease-in-out;
+  height: 100vh;
+  /* filter: grayscale(100%); */
+}
+
+#background-1 {
+  background-image: url("https://res.cloudinary.com/doecwsnly/image/upload/v1537711838/oils-background-image.png");
+  background-size: cover;
+  width: 0%;
+  margin: 0 auto;
+  transition: width 2s ease-in-out;
+  height: 100vh;
+  /* color: rgb(243, 243, 243);
+    transition: color 1s; */
+  /* filter: grayscale(100%); */
+}
+
+#background-2 {
+  background-image: url("https://res.cloudinary.com/doecwsnly/image/upload/v1538050469/foot-picture.webp");
+  background-size: cover;
+  width: 0%;
+  margin: 0 auto;
+  transition: width 2s ease-in-out;
+  height: 100vh;
+  /* filter: grayscale(100%); */
+}
+
+#background-3 {
+  background-image: url("https://res.cloudinary.com/doecwsnly/image/upload/v1538051028/20180927_141736.jpg");
+  background-size: cover;
+  width: 0%;
+  margin: 0 auto;
+  transition: width 2s ease-in-out;
+  height: 100vh;
+  /* filter: grayscale(100%); */
+}
