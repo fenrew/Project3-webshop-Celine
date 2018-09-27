@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import api from "../utils/api";
-import Products from "./Products";
 import CheckoutForm from "./CheckoutForm";
 import "babel-polyfill";
 
@@ -39,16 +38,6 @@ class Checkout extends Component {
           <h1>Loading...</h1>
         </div>
       );
-
-    const mappedProducts = this.state.products.map((el, index) => (
-      <Products
-        product={el.name}
-        image={el.image}
-        price={el.price}
-        quantity={el.quantity}
-        key={index}
-      />
-    ));
 
     return (
       <StripeProvider apiKey="pk_test_Hu2hQvuxdFzg6dJJUBD65JW9">

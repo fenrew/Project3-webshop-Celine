@@ -35,6 +35,18 @@ router.post("/shop/cart", (req, res) => {
   });
 });
 
+router.post("/shop/cart/remove", (req, res) => {
+  const user = req.body.user;
+  User.findByIdAndUpdate(
+    user._id,
+    { shoppingCart: [] },
+    { new: true }
+  ).then(result => {
+    console.log(result)
+    result.save();
+  });
+});
+
 router.get("/purchased", checkLoggedIn, (req, res) => {
   User.findById(req.user._id).then(user => {
     if (user.role !== "admin") return;

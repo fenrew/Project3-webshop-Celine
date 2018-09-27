@@ -8,20 +8,24 @@ class CheckoutForm extends Component {
     super(props);
     this.state = {
       complete: false,
+      clickedButton: false,
       name: "",
       telephone: "",
       address: "",
       postnumber: "",
-      postplace: ""
+      postplace: "",
     };
     this.submit = this.submit.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
   }
 
   async submit(ev) {
+    this.setState({
+      clickedButton: true,
+    })
     const userString = localStorage.getItem("shopping-cart");
-    const user = JSON.parse(userString);
-    const shoppingCart = user.shoppingCart;
+    const usertwo = JSON.parse(userString);
+    const shoppingCart = usertwo.shoppingCart;
     const userInformation = {
       name: this.state.name,
       telephone: this.state.telephone,
@@ -38,8 +42,13 @@ class CheckoutForm extends Component {
 
     console.log(response);
     if (response) {
-      this.setState({ complete: true });
+      localStorage.removeItem("shopping-cart")
+      this.setState({ complete: true, clickedButton: false });
     }
+    let user = this.props.user;
+    api.post("/api/shop/cart/remove", {user}).then((result) => {
+      localStorage.removeItem("shopping-cart");
+    })
   }
 
   render() {
@@ -63,6 +72,16 @@ class CheckoutForm extends Component {
           />
         </div>
       );
+      let buttonAs;
+        if (!this.state.clickedButton) {
+          buttonAs = <button className="stripe-pay-button" onClick={this.submit}>
+          Betal
+        </button>
+        } else if (this.state.clickedButton) {
+          buttonAs = <button className="stripe-pay-button">
+          Jobber..
+        </button>
+        }
     return (
       <div className="stripe-checkout-container">
         <div className="checkout-input">
@@ -81,9 +100,7 @@ class CheckoutForm extends Component {
             style={{ width: "10vw", base: { fontSize: "20px", width: "10vw" } }}
           />
         </div>
-        <button className="stripe-pay-button" onClick={this.submit}>
-          Betal
-        </button>
+        {buttonAs}
       </div>
     );
   }

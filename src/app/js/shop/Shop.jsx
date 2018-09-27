@@ -4,7 +4,7 @@ import OilsNavigation from "./OilsNavigation";
 import CheckoutShop from "./CheckoutShop";
 import api from "../utils/api";
 import { Redirect } from "react-router";
-import CheckoutPage from "./Checkout"
+import CheckoutPage from "./Checkout";
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class App extends Component {
       widthQuickBuy: "0%",
       colorQuickBuy: "transparent",
       fontsizeQuickBuyHeader: "0",
-      fontsizeQuickBuyElement: "0",
+      fontsizeQuickBuyElement: "0"
     };
 
     this.checkoutWidth = 100;
@@ -38,20 +38,17 @@ class App extends Component {
         products: products.result
       });
     });
-    
-    const savedUser = localStorage.getItem("shopping-cart")
-    if(!savedUser) return
 
-    const user = JSON.parse(savedUser)
+    const savedUser = localStorage.getItem("shopping-cart");
+    if (!savedUser) return;
+
+    const user = JSON.parse(savedUser);
     let newTotalPrice = 0;
-    user.shoppingCart.forEach(
-      el => (newTotalPrice += el.price * el.quantity)
-    );
+    user.shoppingCart.forEach(el => (newTotalPrice += el.price * el.quantity));
     this.setState({
       checkout: user.shoppingCart,
       totalPrice: newTotalPrice
     });
-
   }
 
   render() {
@@ -86,7 +83,7 @@ class App extends Component {
         />
       ));
     } else {
-      mappedOilProducts = <CheckoutPage />
+      mappedOilProducts = <CheckoutPage />;
     }
 
     const mappedCheckout = this.state.checkout.map((el, index) => (
@@ -117,10 +114,10 @@ class App extends Component {
     };
     let quickBuyStyleElement = {
       fontSize: this.state.fontsizeQuickBuyElement
-    }
+    };
     let quickBuyStyleButton = {
       left: this.state.widthQuickBuy
-    }
+    };
 
     let mappedOilNavigation;
 
@@ -146,7 +143,10 @@ class App extends Component {
           <h3 className="quick-buy" style={quickBuyStyleHeader}>
             Hurting Kjøp
           </h3>
-          <div className="mapped-navigation-contents" style={quickBuyStyleElement}>
+          <div
+            className="mapped-navigation-contents"
+            style={quickBuyStyleElement}
+          >
             {mappedOilNavigation}
           </div>
         </div>
@@ -211,7 +211,7 @@ class App extends Component {
 
   _handleRedirectCart = () => {
     this.setState({
-      toCheckout: true,
+      toCheckout: true
       // redirect: true
     });
   };
@@ -228,7 +228,7 @@ class App extends Component {
         colorQuickBuy: "transparent",
         widthQuickBuy: "0%",
         fontsizeQuickBuyHeader: "0",
-        fontsizeQuickBuyElement: "0",
+        fontsizeQuickBuyElement: "0"
       });
     } else {
       return this.setState({
@@ -263,8 +263,8 @@ class App extends Component {
       if (!user) return;
       user.result.shoppingCart = newArray;
       user = user.result;
-      
-      localStorage.setItem("shopping-cart", JSON.stringify(user))
+
+      localStorage.setItem("shopping-cart", JSON.stringify(user));
     });
   }
 
@@ -273,7 +273,10 @@ class App extends Component {
       checkout: [],
       totalPrice: 0
     });
-    localStorage.removeItem("shopping-cart")
+    let user = this.props.user;
+    api.post("/api/shop/cart/remove", {user}).then((result) => {
+      localStorage.removeItem("shopping-cart");
+    })
   }
 
   _removeProduct(product) {
@@ -298,7 +301,7 @@ class App extends Component {
       if (!user) return;
       user.result.shoppingCart = newArray;
       user = user.result;
-      localStorage.setItem("shopping-cart", JSON.stringify(user))
+      localStorage.setItem("shopping-cart", JSON.stringify(user));
     });
   }
 }
