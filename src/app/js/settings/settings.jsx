@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { userInfo } from "os";
 import api from "../utils/api";
 import Purchase from "./Purchase";
+import { Redirect } from "react-router";
 
 class settings extends Component {
   constructor(props) {
@@ -9,8 +10,11 @@ class settings extends Component {
 
     this.state = {
       loading: true,
-      purchasedItems: []
+      purchasedItems: [],
+      redirect: false,
     };
+
+    this._handleRedirectBlog = this._handleRedirectBlog.bind(this);
   }
 
   componentDidMount() {
@@ -48,16 +52,25 @@ class settings extends Component {
       );
     }
 
+    if (this.state.redirect) return <Redirect push to="/create-blog-post" />;
+
     const mappedPurchasedItems = this.state.purchasedItems;
 
     return (
       <div>
         <div className="navigation-fix" />
-        <div className="whole-container">
-        {mappedPurchasedItems}
+        <div className="add-blog-post">
+          <div className="add-blog-post-text" onClick={this._handleRedirectBlog}>Skriv et nytt blogg innlegg</div>
         </div>
+        <div className="whole-container">{mappedPurchasedItems}</div>
       </div>
     );
+  }
+
+  _handleRedirectBlog = () => {
+    this.setState({
+      redirect: true,
+    })
   }
 }
 

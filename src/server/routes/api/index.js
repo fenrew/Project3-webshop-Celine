@@ -4,10 +4,14 @@ const Shop = require("../../models/Shop");
 const User = require("../../models/User");
 const Events = require("../../models/Events");
 const Purchase = require("../../models/Purchase");
+const Blogpost = require("../../models/Blogpost");
+const upload = require('../../utils/upload')
 
 const authRoutes = require("./auth");
 const checkoutRoutes = require("./checkout");
 const { userMiddleware, checkLoggedIn } = require("../../utils/middleware");
+
+const util = require('util')
 
 router.use(userMiddleware);
 
@@ -138,6 +142,29 @@ router.get("/blog", (req, res) => {
     });
   });
 });
+
+//---------------------- CREATE BLOG POST -----------------------//
+router.post("/blog-post", (req, res) => {
+  let blogInfo = req.body
+  // console.log("UTILS",util.inspect(req.body, {showHidden: false, depth: null}))
+  User.findById(req.user._id).then(user => {
+    if(user.role !== "admin") return
+    return req.files && req.files.picture ? upload(req.files.picture) : Promise.resolve()
+  }).then(pictureUrl => {
+    console.log(blogInfo)
+      const newBlog = Blogpost({
+       header: blogInfo.header,
+       oneliner: blogInfo.oneliner,
+       info: blogInfo.info,
+       mainPicture: pictureUrl,
+       img: blogInfo.img,
+       date: new Date,
+     })
+      newBlog.save();
+      res.send(true)
+  })
+})
+
 
 //---------------
 
