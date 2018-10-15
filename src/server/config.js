@@ -3,7 +3,7 @@ module.exports = {
     PORT: process.env.PORT || 3000,
     MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/celine-webshop',
     SECRET_JWT_PASSPHRASE: 'TWLom9RDbmGYBtkHHPe4m8pKswyUY',
-    CLOUDINARY_NAME: 'doecwsnly',
-    CLOUDINARY_KEY: '134122139343155',
-    CLOUDINARY_SECRET: 'RiKpKPMqx5jfrjcEmTvussq4Kxs',
+    CLOUDINARY_NAME: 'delw8osvu',
+    CLOUDINARY_KEY: '358815856395683',
+    CLOUDINARY_SECRET: '3Z6EzRb8bCEwoIkoOWxoAvNUGIo',
 }

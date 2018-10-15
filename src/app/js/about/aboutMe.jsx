@@ -6,7 +6,7 @@ class aboutMe extends Component {
       <div className="the-whole-aboutme-container">
         <div className="navigation-fix" />
         <div className="about-text-container">
-        <img src={"https://res.cloudinary.com/doecwsnly/image/upload/v1537789233/4w.jpg"} alt="" className="image-aboutme"/>
+        <img src={"https://res.cloudinary.com/delw8osvu/image/upload/v1539603373/4w.jpg"} alt="" className="image-aboutme"/>
         <div className="aboutme-only-text">
         <span>Jeg er 22 år og en gladjente fra Oslo.</span> Jeg er opptatt av en naturlig,
         god livsstil og ernæring, det er min medisin. Jeg har 1,5 år igjen som

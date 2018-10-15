@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Carousel from "./Carousel";
 import Information from "./Information"
+import BlogPosts from "./BlogPosts"
 
 class Frontpage extends Component {
   render() {
@@ -8,6 +9,7 @@ class Frontpage extends Component {
       <div className="frontpage-container">
         <Carousel />
         <Information />
+        <BlogPosts />
       </div>
     );
   }

@@ -8,6 +8,7 @@ class CreatePost extends Component {
 
     this.state = {
       admin: false,
+      loading: false,
       postCreated: false,
       header: "",
       oneline: "",
@@ -40,11 +41,11 @@ class CreatePost extends Component {
         </div>
       );
 
-    if (this.state.postCreated)
+    if (this.state.loading)
       return (
         <div>
           <div className="navigation-fix" />
-          <h1>Post created</h1>
+          <h1>Lager post, vent litt!</h1>
         </div>
       );
 
@@ -92,12 +93,6 @@ class CreatePost extends Component {
 
   _createBlog() {
     const pictureDeclaration = { picture: this.state.mainPicture };
-    // let blogInfo = {
-    //   header: this.state.header,
-    //   oneliner: this.state.oneliner,
-    //   info: this.state.info,
-    //   img: this.state.img
-    // };
     let response = api.post(
       "/api/blog-post",
       {
@@ -107,13 +102,14 @@ class CreatePost extends Component {
         img: this.state.img
       },
       pictureDeclaration
-    );
+    ).then(result => {
+      console.log("RESULT", result)
+    })
     if (response) {
       this.setState({
-        postCreated: true
+        loading: true
       });
     }
-    console.log(response);
   }
 }
 

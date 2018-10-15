@@ -165,6 +165,12 @@ router.post("/blog-post", (req, res) => {
   })
 })
 
+router.get("/latest/blogposts", (req,res) => {
+  Blogpost.find().then(posts => {
+    posts.reverse()
+    res.send({posts})
+  })
+})
 
 //---------------
 
