@@ -14,12 +14,11 @@ class CreatePost extends Component {
       oneline: "",
       info: "",
       mainPicture: undefined,
-      img: []
+      img: undefined
     };
 
     this._handleChange = this._handleChange.bind(this);
     this._addPicture = this._addPicture.bind(this);
-    this._uploadImage = this._uploadImage.bind(this);
     this._createBlog = this._createBlog.bind(this);
   }
 
@@ -60,7 +59,6 @@ class CreatePost extends Component {
           img={this.state.img}
           addPicture={this._addPicture}
           createEvent={this._createEvent}
-          uploadImage={this._uploadImage}
           createBlog={this._createBlog}
         />
       </div>
@@ -74,32 +72,28 @@ class CreatePost extends Component {
   }
 
   _addPicture(value) {
-    let newArray = this.state.img;
-    if (!newArray) newArray = [];
-    newArray.push(value);
-    this.setState({
-      img: newArray
-    });
-  }
-
-  _uploadImage() {
-    cloudinary.openUploadWidget(
-      { cloud_name: "demo", upload_preset: "a5vxnzbp" },
-      function(error, result) {
-        console.log(error, result);
-      }
-    );
+    console.log(value)
+    // let newArray = this.state.img;
+    // if (!newArray) newArray = [];
+    // newArray.push(value);
+    // this.setState({
+    //   img: newArray
+    // });
   }
 
   _createBlog() {
-    const pictureDeclaration = { picture: this.state.mainPicture };
+    let pictureDeclaration = {};
+    this.state.img.forEach((el, index) => {
+      pictureDeclaration[index.toString()] = el
+    })
+    pictureDeclaration.picture = this.state.mainPicture;
     let response = api.post(
       "/api/blog-post",
       {
         header: this.state.header,
         oneliner: this.state.oneliner,
         info: this.state.info,
-        img: this.state.img
+        numberOfImages: this.state.img.length,
       },
       pictureDeclaration
     ).then(result => {

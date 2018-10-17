@@ -4,7 +4,6 @@ const LatestBlog = props => {
   let imageStyle = {
     backgroundImage: "url('" + props.post.mainPicture + "')"
   };
-  console.log(props.post);
   return (
     <div className="latest-blog-post-container">
       <div className="latest-blog-post-background-image" style={imageStyle}>
@@ -12,7 +11,7 @@ const LatestBlog = props => {
         <div className="latest-blog-post-text-container">
           <h1 className="latestblog-header">{props.post.header}</h1>
           <div className="latestblog-oneliner">{props.post.oneliner}</div>
-          <button className="latestblog-button">Les mer</button>
+          <button className="latestblog-button" onClick={() => props.onClickHandler(props.post)}>Les mer</button>
         </div>
       </div>
       </div>

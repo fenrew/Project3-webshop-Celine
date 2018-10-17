@@ -43,12 +43,14 @@ const BlogForm = props => {
       <div>
         <br />
         <div>Legg til slide-show bilder:</div>
-        <button
-          className="upload-image-blog"
-          onClick={() => props.uploadImage()}
-        >
-          Legg til bilder
-        </button>
+        <input
+          type="file"
+          name="my_file[]"
+          multiple
+          onChange={evt =>
+            props.handleChange("img", Array.from(evt.target.files))
+          }
+        />
       </div>
       <br />
       <button className="add-blog-button" onClick={() => props.createBlog()}>

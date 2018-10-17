@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import api from "../utils/api";
 import LatestBlog from "./LatestBlog";
+import SpecificPost from "./SpecificPost";
 
 class BlogPosts extends Component {
   constructor(props) {
@@ -8,8 +9,13 @@ class BlogPosts extends Component {
 
     this.state = {
       loading: true,
-      blogposts: []
+      blogposts: [],
+      specificPost: false,
+      singlePost: "",
     };
+
+    this._clickGoBack = this._clickGoBack.bind(this)
+    this._onClickHandler = this._onClickHandler.bind(this)
   }
 
   componentDidMount() {
@@ -26,13 +32,37 @@ class BlogPosts extends Component {
         <h1>Loading...</h1>
     )
 
+    if(this.state.specificPost) return (
+      <div>
+        <SpecificPost 
+        post = {this.state.singlePost}
+        clickGoBack = {this._clickGoBack}
+        />
+      </div>
+    )
+
     return (
         <div>
             <LatestBlog
             post = {this.state.blogposts[0]}
+            onClickHandler = {this._onClickHandler}
             />
         </div>
     )
+  }
+
+  _onClickHandler(post) {
+    this.setState({
+      specificPost: true,
+      singlePost: post,
+    })
+  }
+
+  _clickGoBack() {
+    this.setState({
+      specificPost: false,
+      singlePost: ""
+    });
   }
 }
 
