@@ -1,0 +1,125 @@
+.latest-blog-post-container {
+  background-color: white;
+  height: 30vw;
+  width: 50vw;
+  margin: 5vw 0 0 12.5vw;
+  padding-top: 3vw;
+  font-family: "Slabo+27px", sans-serif;
+}
+
+.latest-blog-post-background-image {
+  height: 90%;
+  width: 90%;
+  margin: 0 auto 0 auto;
+  background-size: 100% 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.latest-blog-border-container {
+  max-width: 60%;
+  padding: 1vw;
+  background-color: rgba(255, 255, 255, 0.842);
+}
+
+.latest-blog-post-text-container {
+  height: 100%;
+  box-shadow: 0px 0px 3px 1px rgb(0, 0, 0);
+  padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.latestblog-header {
+  color: rgb(11, 11, 11);
+  text-align: center;
+  margin: 0;
+  font-weight: 200;
+  font-size: 2vw;
+  margin-bottom: -1vw;
+}
+
+.latestblog-oneliner {
+  font-size: 1.4vw;
+  text-align: center;
+  color: rgb(22, 22, 22);
+  margin: 1.4vw 0;
+}
+
+.latestblog-button {
+  width: 7vw;
+  height: 2.5vw;
+  font-family: "Maitree", sans-serif;
+  line-height: 1px;
+  font-size: 1.3vw;
+  font-weight: bold;
+  background-color: rgb(218, 150, 150);
+  border: 2px solid rgb(202, 63, 63);
+  border-radius: 5%;
+  margin: 0vw auto;
+}
+
+.latestblog-button:hover {
+  cursor: pointer;
+  background-color: rgb(202, 63, 63);
+}
+
+
+//-------------- SPECIFIC POST ----------------//
+
+.specific-post-container {
+    width: 42vw;
+    max-height: 72vh;
+    margin: 5vw 0 0 12.5vw;
+    background-color: white;
+    padding: 4vw;
+    font-family: "Maitree", sans-serif;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.specific-post-header{
+    margin: 0;
+}
+
+.specific-post-image{
+    width: 42vw;
+    height: 30vw;
+    background-size: 100% 100%;
+}
+
+.specific-post-info{
+    white-space: pre-wrap;
+}
+
+.specific-post-minimize{
+    position: absolute;
+    font-size: 1vw;
+    color: rgb(228, 87, 87);
+    left: 0.8vw;
+    top: 0.5vw;
+    line-height: 2vw;
+    font-weight: 700;
+}
+
+.specific-post-minimize:hover{
+    cursor: pointer;
+    color: rgb(255, 24, 24);
+}
+
+.specific-post-minimize-two{
+    font-size: 1vw;
+    color: rgb(228, 87, 87);
+    line-height: 2vw;
+    font-weight: 700;
+    margin-left: -3vw;
+    margin-bottom: -3vw;
+}
+
+.specific-post-minimize-two:hover{
+    cursor: pointer;
+    color: rgb(255, 24, 24);
+}

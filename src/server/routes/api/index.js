@@ -4,10 +4,14 @@ const Shop = require("../../models/Shop");
 const User = require("../../models/User");
 const Events = require("../../models/Events");
 const Purchase = require("../../models/Purchase");
+const Blogpost = require("../../models/Blogpost");
+const upload = require('../../utils/upload')
 
 const authRoutes = require("./auth");
 const checkoutRoutes = require("./checkout");
 const { userMiddleware, checkLoggedIn } = require("../../utils/middleware");
+
+const util = require('util')
 
 router.use(userMiddleware);
 
@@ -138,6 +142,85 @@ router.get("/blog", (req, res) => {
     });
   });
 });
+
+//---------------------- CREATE BLOG POST -----------------------//
+router.post("/blog-post", (req, res) => {
+  let blogInfo = req.body;
+  let files = req.files;
+  let arrayOfUrls = [];
+  // console.log("UTILS",util.inspect(req.body, {showHidden: false, depth: null}))
+  // for(var key in files) {
+  //   // upload(files[key]).then((url) => {
+  //   //   console.log("URL", url)
+  //   //   arrayOfUrls.push(url)
+  //   // })
+  // }
+  // User.findById(req.user._id).then(user => {
+  //   if(user.role !== "admin") return
+  //   console.log("Array OF URLS2", arrayOfUrls)
+  //   return req.files && req.files.picture ? upload(req.files.picture) : Promise.resolve()
+  // }).then(pictureUrl => {
+  //   console.log("PICTUREURL", pictureUrl)
+  //     const newBlog = Blogpost({
+  //      header: blogInfo.header,
+  //      oneliner: blogInfo.oneliner,
+  //      info: blogInfo.info,
+  //      mainPicture: pictureUrl,
+  //      date: new Date,
+  //    })
+  //     newBlog.save();
+  //     res.send(true)
+  // })
+
+  User.findById(req.user._id).then(user => {
+    if(user.role !== "admin") return
+    console.log("Array OF URLS2", arrayOfUrls)
+    console.log("PICTURE", req.files.picture)
+    console.log(files[Object.keys(files)[0]])
+    return req.files && req.files[Object.keys(req.files)[0]] ? upload(files[Object.keys(files)[0]]) : Promise.resolve()
+  }).then(pictureUrl => {
+    arrayOfUrls.push(pictureUrl)
+    console.log("PICTUREURL", pictureUrl)
+    return req.files && req.files[Object.keys(req.files)[1]] ? upload(req.files[Object.keys(req.files)[1]]) : Promise.resolve()
+  }).then(pictureUrl2 => {
+    arrayOfUrls.push(pictureUrl2)
+    console.log("PICTUREURL2", pictureUrl2)
+    console.log("ARRAY", arrayOfUrls)
+    return req.files && req.files[Object.keys(req.files)[2]] ? upload(req.files[Object.keys(req.files)[2]]) : Promise.resolve()
+  }).then(pictureUrl3 => {
+    arrayOfUrls.push(pictureUrl3)
+    console.log("ARRAY", arrayOfUrls)
+    return req.files && req.files[Object.keys(req.files)[3]] ? upload(req.files[Object.keys(req.files)[3]]) : Promise.resolve()
+}).then(pictureUrl4 => {
+  arrayOfUrls.push(pictureUrl4)
+  console.log("ARRAY", arrayOfUrls)
+  return req.files && req.files[Object.keys(req.files)[4]] ? upload(req.files[Object.keys(req.files)[4]]) : Promise.resolve()
+}).then(pictureUrl5 => {
+  arrayOfUrls.push(pictureUrl5)
+  console.log("ARRAY", arrayOfUrls)
+  return req.files && req.files[Object.keys(req.files)[5]] ? upload(req.files[Object.keys(req.files)[5]]) : Promise.resolve()
+}).then(pictureUrl5 => {
+  arrayOfUrls.push(pictureUrl5)
+  console.log("ARRAY", arrayOfUrls)
+      const newBlog = Blogpost({
+       header: blogInfo.header,
+       oneliner: blogInfo.oneliner,
+       info: blogInfo.info,
+       mainPicture: arrayOfUrls[blogInfo.numberOfImages],
+       img: arrayOfUrls,
+       date: new Date,
+     })
+      newBlog.save();
+      res.send(true)
+})
+})
+
+router.get("/latest/blogposts", (req,res) => {
+  Blogpost.find().then(posts => {
+    posts.reverse()
+    res.send({posts})
+  })
+})
 
 //---------------
 

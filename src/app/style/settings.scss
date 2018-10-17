@@ -1,57 +1,79 @@
-.whole-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    background-color: rgba(223, 223, 223, 0.698);
+.add-blog-post {
+  height: 8vw;
+  background-color: rgba(223, 223, 223, 0.698);
+  padding-top: 3vw;
 }
 
-.each-purchase-container{
-    display: flex;
-    justify-content: center;
-    margin: 2vw 0vw;
-    font-size: 1.3vw;
-    border: 2px solid black;
-    width: 45%;
-    padding: 1vw;
-    position: relative;
+.add-blog-post-text {
+    height: 5vw;
+    width: 15vw;
+    font-size: 1.5vw;
+    background-color: rgb(132, 132, 243);
+    margin: 0 auto 0 auto;
+    text-align: center;
+    border: 3px solid blue;
+    padding-top: 1vw;
+}
+
+.add-blog-post-text:hover {
+    border: 3px solid red;
+    cursor: pointer;
+}
+
+.whole-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: rgba(223, 223, 223, 0.698);
+}
+
+.each-purchase-container {
+  display: flex;
+  justify-content: center;
+  margin: 2vw 0vw;
+  font-size: 1.3vw;
+  border: 2px solid black;
+  width: 45%;
+  padding: 1vw;
+  position: relative;
 }
 
 .each-purchase-container h2 {
-    text-decoration: underline;
-    margin: 0.5vw 0 1.5vw 0;
-    line-height: 0;
-    font-size: 1.7vw;
+  text-decoration: underline;
+  margin: 0.5vw 0 1.5vw 0;
+  line-height: 0;
+  font-size: 1.7vw;
 }
 
 .each-purchase-button {
-    position: absolute;
-    left: 2vw;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background-color: green;
-    border: 3px solid black;
-    z-index: 3;
+  position: absolute;
+  left: 2vw;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: green;
+  border: 3px solid black;
+  z-index: 3;
 }
 
 .text-box-info {
-    display: flex;
-    line-height: 1.8vw;
+  display: flex;
+  line-height: 1.8vw;
 }
 
 .text-box-info-first-box {
-    margin: 0 1vw 0 0;
+  margin: 0 1vw 0 0;
 }
 
 .each-purchase-information {
-    margin: 0 3vw 0 0;
+  margin: 0 3vw 0 0;
 }
 
 .each-item {
-    margin: 1vw 0;
-    line-height: 1vw;
+  margin: 1vw 0;
+  line-height: 1vw;
 }
 
 table td {
-    padding-right: 1vw;
+  padding-right: 1vw;
 }
