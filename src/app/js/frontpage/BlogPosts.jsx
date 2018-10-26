@@ -14,7 +14,8 @@ class BlogPosts extends Component {
       loading: true,
       blogposts: [],
       specificPost: false,
-      singlePost: ""
+      singlePost: "",
+      showPosts: 5,
     };
 
     this.myRef = React.createRef();
@@ -22,6 +23,7 @@ class BlogPosts extends Component {
     this._clickGoBack = this._clickGoBack.bind(this);
     this._onClickHandler = this._onClickHandler.bind(this);
     this.scrollToDomRef = this.scrollToDomRef.bind(this);
+    this._toOlderPosts = this._toOlderPosts.bind(this)
   }
 
   componentDidMount() {
@@ -37,6 +39,7 @@ class BlogPosts extends Component {
     if (this.state.loading) return <h1>Loading...</h1>;
 
     const mappedPosts = this.state.blogposts.map((el, index) => {
+      if (index > this.state.showPosts) return;
       return (
         <AllBlogPosts
           post={el}
@@ -60,6 +63,10 @@ class BlogPosts extends Component {
             <SocialMedia />
           </div>
           <div className="allposts-whole-container">{mappedPosts}</div>
+          <div className="allposts-older-container" onClick={() => this._toOlderPosts()}>
+          <span>Eldre innlegg</span>
+          <div className="allposts-older-arrow">{"<"}</div>
+        </div>
         </div>
       );
 
@@ -75,6 +82,10 @@ class BlogPosts extends Component {
           <SocialMedia />
         </div>
         <div className="allposts-whole-container">{mappedPosts}</div>
+        <div className="allposts-older-container" onClick={() => this._toOlderPosts()}>
+          <span>Eldre innlegg</span>
+          <div className="allposts-older-arrow">{"<"}</div>
+        </div>
       </div>
     );
   }
@@ -99,6 +110,13 @@ class BlogPosts extends Component {
     const myDomNode = ReactDOM.findDOMNode(this.myRef.current);
     myDomNode.scrollIntoView();
   };
+
+  _toOlderPosts() {
+    let newShowPosts = this.state.showPosts + 6;
+    this.setState({
+      showPosts: newShowPosts,
+    });
+  }
 }
 
 export default BlogPosts;

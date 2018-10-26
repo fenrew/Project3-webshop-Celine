@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
 class Carousel extends Component {
   constructor(props) {
@@ -27,10 +28,12 @@ class Carousel extends Component {
     };
     this.fadingContinue = true;
     this.slideContinue = true;
+    this.myRef = React.createRef();
 
     this._newSlide = this._newSlide.bind(this);
     this._textFading = this._textFading.bind(this);
     this._textFadingTwo = this._textFadingTwo.bind(this);
+    this.scrollToDomRef = this.scrollToDomRef.bind(this);
   }
 
   componentDidMount() {
@@ -75,101 +78,107 @@ class Carousel extends Component {
     };
 
     return (
-      <div id="flex">
-        <div
-          id="background-0"
-          style={widthOne}
-          onClick={() =>
-            this._newSlide(
-              "widthOne",
-              "widthTwo",
-              "headerOne",
-              "headerTwo",
-              "doTERRA eteriske",
-              "fadingClassOne",
-              "fadingClassTwo",
-              "wordSizeOne",
-              "wordSizeTwo"
-            )
-          }
-        >
-          <div className="background-overlay-image">
-            <h1 className={this.state.fadingClassOne} style={fontOne}>
-              {this.state.headerOne}
-            </h1>
+      <div>
+        <div id="flex">
+          <div
+            id="background-0"
+            style={widthOne}
+            onClick={() =>
+              this._newSlide(
+                "widthOne",
+                "widthTwo",
+                "headerOne",
+                "headerTwo",
+                "doTERRA eteriske",
+                "fadingClassOne",
+                "fadingClassTwo",
+                "wordSizeOne",
+                "wordSizeTwo"
+              )
+            }
+          >
+            <div className="background-overlay-image">
+              <h1 className={this.state.fadingClassOne} style={fontOne}>
+                {this.state.headerOne}
+              </h1>
+            </div>
+          </div>
+          <div
+            id="background-1"
+            style={widthTwo}
+            onClick={() =>
+              this._newSlide(
+                "widthTwo",
+                "widthThree",
+                "headerTwo",
+                "headerThree",
+                "Kosthold og Ernæring",
+                "fadingClassTwo",
+                "fadingClassThree",
+                "wordSizeTwo",
+                "wordSizeThree"
+              )
+            }
+          >
+            <div className="background-overlay-image">
+              <div className="nagivation-fix" />
+              <h1 className={this.state.fadingClassTwo} style={fontTwo}>
+                {this.state.headerTwo}
+              </h1>
+            </div>
+          </div>
+          <div
+            id="background-2"
+            style={widthThree}
+            onClick={() =>
+              this._newSlide(
+                "widthThree",
+                "widthFour",
+                "headerThree",
+                "headerFour",
+                "Created by Markus Heldrup",
+                "fadingClassThree",
+                "fadingClassFour",
+                "wordSizeThree",
+                "wordSizeFour"
+              )
+            }
+          >
+            <div className="background-overlay-image">
+              <div className="nagivation-fix" />
+              <h1 className={this.state.fadingClassThree} style={fontThree}>
+                {this.state.headerThree}
+              </h1>
+            </div>
+          </div>
+          <div
+            id="background-3"
+            style={widthFour}
+            onClick={() =>
+              this._newSlide(
+                "widthFour",
+                "widthOne",
+                "headerFour",
+                "headerOne",
+                "Celine Heldrup",
+                "fadingClassFour",
+                "fadingClassOne",
+                "wordSizeFour",
+                "wordSizeOne"
+              )
+            }
+          >
+            <div className="background-overlay-image">
+              <div className="nagivation-fix" />
+              <h1 className={this.state.fadingClassFour} style={fontFour}>
+                {this.state.headerFour}
+              </h1>
+            </div>
           </div>
         </div>
-        <div
-          id="background-1"
-          style={widthTwo}
-          onClick={() =>
-            this._newSlide(
-              "widthTwo",
-              "widthThree",
-              "headerTwo",
-              "headerThree",
-              "Kosthold og Ernæring",
-              "fadingClassTwo",
-              "fadingClassThree",
-              "wordSizeTwo",
-              "wordSizeThree"
-            )
-          }
-        >
-          <div className="background-overlay-image">
-            <div className="nagivation-fix" />
-            <h1 className={this.state.fadingClassTwo} style={fontTwo}>
-              {this.state.headerTwo}
-            </h1>
-          </div>
-        </div>
-        <div
-          id="background-2"
-          style={widthThree}
-          onClick={() =>
-            this._newSlide(
-              "widthThree",
-              "widthFour",
-              "headerThree",
-              "headerFour",
-              "Created by Markus Heldrup",
-              "fadingClassThree",
-              "fadingClassFour",
-              "wordSizeThree",
-              "wordSizeFour"
-            )
-          }
-        >
-          <div className="background-overlay-image">
-            <div className="nagivation-fix" />
-            <h1 className={this.state.fadingClassThree} style={fontThree}>
-              {this.state.headerThree}
-            </h1>
-          </div>
-        </div>
-        <div
-          id="background-3"
-          style={widthFour}
-          onClick={() =>
-            this._newSlide(
-              "widthFour",
-              "widthOne",
-              "headerFour",
-              "headerOne",
-              "Celine Heldrup",
-              "fadingClassFour",
-              "fadingClassOne",
-              "wordSizeFour",
-              "wordSizeOne"
-            )
-          }
-        >
-          <div className="background-overlay-image">
-            <div className="nagivation-fix" />
-            <h1 className={this.state.fadingClassFour} style={fontFour}>
-              {this.state.headerFour}
-            </h1>
-          </div>
+        <div className="carousel-more-button" ref={this.myRef} onClick={() => this.scrollToDomRef()}>
+          Mer <br />
+          <div className="carousel-arrow">{">"}</div>
         </div>
       </div>
     );
@@ -245,6 +254,12 @@ class Carousel extends Component {
       return;
     }
   }
+
+  scrollToDomRef = () => {
+    console.log(this.myRef.current);
+    const myDomNode = ReactDOM.findDOMNode(this.myRef.current);
+    myDomNode.scrollIntoView();
+  };
 }
 
 export default Carousel;

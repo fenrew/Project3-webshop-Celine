@@ -176,3 +176,18 @@
   border-radius: 5%;
   margin: 0vw auto;
 }
+
+.allposts-older-container{
+  text-align: center;
+  color: blue;
+}
+
+.allposts-older-container:hover{
+  cursor: pointer;
+}
+
+.allposts-older-arrow{
+  -webkit-transform: rotate(-90deg);
+  margin: 0 auto;
+  width: 1vw;
+}

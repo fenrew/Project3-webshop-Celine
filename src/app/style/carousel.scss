@@ -69,3 +69,20 @@
   height: 100vh;
   /* filter: grayscale(100%); */
 }
+
+.carousel-more-button{
+  position: absolute;
+  font-size: 1.6vw;
+  top: 90vh;
+  left: 45vw;
+  color: rgb(234, 234, 255);
+}
+
+.carousel-more-button:hover{
+  cursor: pointer;
+}
+
+.carousel-arrow{
+  -webkit-transform: rotate(90deg);
+  margin: 0.5vw 0.5vw 0 0;
+}
