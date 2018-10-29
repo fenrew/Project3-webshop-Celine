@@ -89,7 +89,7 @@ class Carousel extends Component {
                 "widthTwo",
                 "headerOne",
                 "headerTwo",
-                "doTERRA eteriske",
+                "doTERRA oljer",
                 "fadingClassOne",
                 "fadingClassTwo",
                 "wordSizeOne",

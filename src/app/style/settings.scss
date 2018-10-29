@@ -1,7 +1,14 @@
+.add-more-flex-container{
+  display: flex;
+  justify-content: center;
+  background-color: rgba(223, 223, 223, 0.698);
+}
+
 .add-blog-post {
   height: 8vw;
   background-color: rgba(223, 223, 223, 0.698);
   padding-top: 3vw;
+  margin-right: 2vw;
 }
 
 .add-blog-post-text {
@@ -20,6 +27,30 @@
     cursor: pointer;
 }
 
+.add-sale {
+  height: 8vw;
+  background-color: rgba(223, 223, 223, 0.698);
+  padding-top: 3vw;
+}
+
+.add-sale-text{
+  height: 4vw;
+  width: 15vw;
+  font-size: 1.5vw;
+  background-color: rgb(132, 132, 243);
+  margin: 0 auto 0 auto;
+  text-align: center;
+  border: 3px solid blue;
+  padding-top: 2vw;
+}
+
+.add-sale-text:hover {
+  border: 3px solid red;
+  cursor: pointer;
+}
+
+
+// ----------------------- //
 .whole-container {
   display: flex;
   flex-wrap: wrap;

@@ -5,6 +5,7 @@ const User = require("../../models/User");
 const Events = require("../../models/Events");
 const Purchase = require("../../models/Purchase");
 const Blogpost = require("../../models/Blogpost");
+const Sale = require("../../models/Sale")
 const upload = require('../../utils/upload')
 
 const authRoutes = require("./auth");
@@ -223,6 +224,28 @@ router.get("/latest/blogposts", (req,res) => {
 })
 
 //---------------
+
+//----------- CREATE SALE -----------//
+
+router.post("/create-sale", (req, res) => {
+  User.findById(req.user._id).then(user => {
+    if(user.role !== "admin") return
+    console.log(req.body.header)
+    const newSale = Sale({
+      header: req.body.header,
+      text: req.body.text,
+    })
+    newSale.save(),
+    res.send(true)
+  })
+})
+
+router.get("/sale", (req,res) => {
+  Sale.find().then(sale => {
+    sale.reverse();
+    res.send(sale[0])
+  })
+})
 
 //--------------- EVENT -------------//
 

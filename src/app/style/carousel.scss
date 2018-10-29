@@ -86,3 +86,29 @@
   -webkit-transform: rotate(90deg);
   margin: 0.5vw 0.5vw 0 0;
 }
+
+//----------- SALES ----------//
+
+.sales-container{
+  width: 15%;
+  position: absolute;
+  top: 8vw;
+  background-color: rgba(255, 255, 255, 0.911);
+  right:7vw;
+  padding: 0.7vw;
+  border-radius: 3%;
+}
+
+.sales-border-container {
+  box-shadow: 0px 0px 3px 1px rgb(0, 0, 0);
+  padding: 0.6vw;
+}
+
+.sales-header{
+  margin: 0;
+}
+
+.sales-text{
+  margin-top: 0.5vw;
+  font-size: 1.3vw;
+}

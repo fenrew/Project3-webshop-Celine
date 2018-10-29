@@ -11,10 +11,13 @@ class settings extends Component {
     this.state = {
       loading: true,
       purchasedItems: [],
-      redirect: false,
+      redirectBlog: false,
+      redirectSale: false,
     };
 
     this._handleRedirectBlog = this._handleRedirectBlog.bind(this);
+    this._handleRedirectSale = this._handleRedirectSale.bind(this);
+
   }
 
   componentDidMount() {
@@ -52,15 +55,26 @@ class settings extends Component {
       );
     }
 
-    if (this.state.redirect) return <Redirect push to="/create-blog-post" />;
+    if (this.state.redirectBlog) return <Redirect push to="/create-blog-post" />;
+    if (this.state.redirectSale) return <Redirect push to="/create-sale" />
 
     const mappedPurchasedItems = this.state.purchasedItems;
 
     return (
       <div>
         <div className="navigation-fix" />
-        <div className="add-blog-post">
-          <div className="add-blog-post-text" onClick={this._handleRedirectBlog}>Skriv et nytt blogg innlegg</div>
+        <div className="add-more-flex-container">
+          <div className="add-blog-post">
+            <div
+              className="add-blog-post-text"
+              onClick={this._handleRedirectBlog}
+            >
+              Skriv et nytt blogg innlegg
+            </div>
+          </div>
+          <div className="add-sale" onClick={this._handleRedirectSale}>
+            <div className="add-sale-text">Nytt tilbud</div>
+          </div>
         </div>
         <div className="whole-container">{mappedPurchasedItems}</div>
       </div>
@@ -69,7 +83,13 @@ class settings extends Component {
 
   _handleRedirectBlog = () => {
     this.setState({
-      redirect: true,
+      redirectBlog: true
+    });
+  };
+
+  _handleRedirectSale = () => {
+    this.setState({
+      redirectSale: true,
     })
   }
 }
