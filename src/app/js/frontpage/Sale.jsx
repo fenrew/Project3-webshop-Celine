@@ -14,12 +14,14 @@ class Sale extends Component {
 
   componentDidMount() {
     api.get("/api/sale").then(result => {
-      console.log(result);
-      this.setState({
-        header: result.header,
-        text: result.text,
-        sale: true,
-      });
+        console.log(result.header.length)
+      if(result.header.length > 0) {
+          this.setState({
+            header: result.header,
+            text: result.text,
+            sale: true,
+          });
+      }
     });
   }
 
