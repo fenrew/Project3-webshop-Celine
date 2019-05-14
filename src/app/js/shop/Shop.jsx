@@ -274,7 +274,9 @@ class App extends Component {
       totalPrice: 0
     });
     let user = this.props.user;
+    localStorage.removeItem("shopping-cart");
     api.post("/api/shop/cart/remove", {user}).then((result) => {
+      console.log("JOIJOIJ")
       localStorage.removeItem("shopping-cart");
     })
   }

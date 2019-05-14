@@ -180,6 +180,9 @@ class Carousel extends Component {
           Mer <br />
           <div className="carousel-arrow">{">"}</div>
         </div>
+        <div className="carousel-created-by">
+          Created by Markus Heldrup
+        </div>
       </div>
     );
   }

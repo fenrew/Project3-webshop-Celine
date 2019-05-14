@@ -87,6 +87,7 @@ class CreatePost extends Component {
       pictureDeclaration[index.toString()] = el
     })
     pictureDeclaration.picture = this.state.mainPicture;
+    console.log(pictureDeclaration)
     let response = api.post(
       "/api/blog-post",
       {

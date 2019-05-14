@@ -76,6 +76,7 @@
   top: 90vh;
   left: 45vw;
   color: rgb(234, 234, 255);
+  font-weight: bold;
 }
 
 .carousel-more-button:hover{
@@ -87,28 +88,43 @@
   margin: 0.5vw 0.5vw 0 0;
 }
 
+.carousel-created-by{
+  position: absolute;
+  font-size: 1.0vw;
+  bottom: 1vh;
+  right: 1vw;
+  color: rgba(0, 0, 0, 0.651);
+  font-weight: bold;
+}
+
 //----------- SALES ----------//
 
 .sales-container{
-  width: 15%;
+  width: 17%;
   position: absolute;
   top: 8vw;
-  background-color: rgba(255, 255, 255, 0.911);
-  right:7vw;
+  background-color: rgb(251, 227, 253);
+  right:5vw;
   padding: 0.7vw;
   border-radius: 3%;
 }
 
 .sales-border-container {
-  box-shadow: 0px 0px 3px 1px rgb(0, 0, 0);
+  box-shadow: 0px 0px 3px 1px rgb(241, 80, 241);
   padding: 0.6vw;
 }
 
 .sales-header{
-  margin: 0;
+  color: rgb(0, 0, 0);
+  font-family: "Maitree", cursive;
+  line-height: 0;
+  font-size: 1.4vw;
 }
 
 .sales-text{
   margin-top: 0.5vw;
-  font-size: 1.3vw;
+  font-size: 1.1vw;
+  color: rgb(22, 22, 22);
+  font-family: "Maitree";
+  line-height: 1.5vw;
 }

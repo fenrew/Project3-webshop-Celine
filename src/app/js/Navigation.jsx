@@ -13,7 +13,7 @@ const Navigation = props => {
     return <div id="navigation-bar">
         <Link to="/">Hjem</Link>
         {/* <Link to="/shop">Butikk</Link> */}
-        <Link to="/doterra">doTERRA oljer</Link>
+        <Link to="/shop">Butikk</Link>
         <Link to="/events">Kurs & foredrag</Link>
         <Link to="/blog">Blogg</Link>
         <Link to="/about-me">Om meg</Link>
