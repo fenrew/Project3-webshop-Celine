@@ -1,4 +1,4 @@
-# React + express starter template, by Lukas
+# React + express starter template.
 
 1. Clone or copy this repository
 2. `npm install`
